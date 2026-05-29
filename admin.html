@@ -11,6 +11,9 @@
     :root { --gold: #a8965e; --gold-d: #8a7848; --ink: #111; --muted: #777; --border: #e4e4e4; --bg: #f2f1ef; --white: #fff; }
     body { font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink); background: var(--bg); min-height: 100vh; }
 
+    /* fix: CSS display overrides HTML hidden attribute */
+    [hidden] { display: none !important; }
+
     /* ── LOGIN ── */
     #loginWrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #1a1a1a; }
     .login-card { background: var(--white); border-radius: 14px; padding: 44px 40px; width: 360px; box-shadow: 0 24px 60px rgba(0,0,0,.35); display: flex; flex-direction: column; gap: 12px; }
@@ -125,7 +128,6 @@
     <div class="login-err" id="loginErr"></div>
     <input type="password" id="pwInput" placeholder="Senha de acesso" autocomplete="current-password">
     <button class="btn-gold" id="btnLogin">Entrar</button>
-    <pre id="debugLog" style="font-size:10px;background:#111;color:#0f0;padding:8px;border-radius:6px;white-space:pre-wrap;max-height:150px;overflow-y:auto;display:none;margin-top:4px"></pre>
   </div>
 </div>
 
@@ -173,56 +175,26 @@ async function doLogin() {
   btnLogin.disabled = true;
   loginErr.className = 'login-err';
 
-  const debugEl = document.getElementById('debugLog');
-  if (debugEl) { debugEl.style.display = 'block'; debugEl.textContent = ''; }
-  const dbg = (msg) => {
-    if (debugEl) debugEl.textContent += msg + '\n';
-  };
-
   try {
-    dbg('1. Enviando senha para /api/update...');
-    let r, rJson;
-    try {
-      r = await fetch('/api/update', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({password: entered, data: null})
-      });
-      dbg('2. Resposta API: status=' + r.status + ' ok=' + r.ok);
-      rJson = await r.json().catch(() => ({}));
-      dbg('3. Body: ' + JSON.stringify(rJson));
-    } catch(fetchErr) {
-      dbg('ERRO fetch: ' + fetchErr.message);
-      showLoginErr('Erro de rede: ' + fetchErr.message);
-      return;
-    }
-
+    const r = await fetch('/api/update', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({password: entered, data: null})
+    });
+    const rJson = await r.json().catch(() => ({}));
     if (!r.ok) {
       showLoginErr(rJson.error || 'Senha incorreta. Tente novamente.');
       return;
     }
-
-    dbg('4. Auth OK, buscando data.json...');
     pw = entered;
-    let dr;
-    try {
-      dr = await fetch('/data.json?_=' + Date.now());
-      dbg('5. data.json: status=' + dr.status);
-    } catch(fetchErr2) {
-      dbg('ERRO data.json fetch: ' + fetchErr2.message);
-      throw fetchErr2;
-    }
+    const dr = await fetch('/data.json?_=' + Date.now());
     if (!dr.ok) throw new Error('Erro ao carregar o cardápio (HTTP ' + dr.status + ').');
     DATA = await dr.json();
-    dbg('6. DATA carregado, tiers: ' + Object.keys(DATA.tiers||{}).join(','));
     loginWrap.hidden = true;
     appWrap.hidden = false;
-    dbg('7. Abrindo painel...');
     renderSidebar();
     selectTier('1');
-    dbg('8. Pronto!');
   } catch(e) {
-    dbg('CATCH: ' + e.message);
     showLoginErr(e.message || 'Erro de conexão. Tente novamente.');
   } finally {
     btnLogin.textContent = 'Entrar';
