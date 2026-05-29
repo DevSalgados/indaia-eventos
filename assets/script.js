@@ -2,263 +2,8 @@
    INDAIÁ EVENTOS — Interações
    ========================================================= */
 
-/* ---------- Tier data (extraído do PDF Indaiá) ---------- */
-const it = (name, tags = []) => ({ name, tags });
-
-const PRIVILEGE_EXCELLENCE_FEATURES = [
-  { num: '4', label: 'Entrada', items: [
-    it('Bolinho de peixe'),
-    it('Pães caseiros c/ patês (linguiça e truta)'),
-    it('Mini risoto de salmão', ['glu']),
-    it('Escondidinho de camarão c/ catupiry'),
-    it('Mini paella de frutos do mar', ['glu', 'lac']),
-    it('Batata Noissete ao molho tártaro', ['veg']),
-    it('Queijo de colono em cubos', ['glu']),
-    it('Mini caldeirada de frutos do mar', ['glu', 'lac']),
-  ]},
-  { num: '4', label: 'Pratos principais', items: [
-    it('Frango — Bechamel c/ Bacon'),
-    it('Frango — Strogonoff'),
-    it('Picanha Suína — Mostarda e Mel', ['glu', 'lac']),
-    it('Picanha Suína — Barbecue c/ Cebola', ['glu', 'lac']),
-    it('Salmão — A Belle Meunière', ['glu']),
-    it('Salmão — Molho de camarão'),
-    it('Filet — Ao molho mostarda', ['glu']),
-    it('Filet — Ao molho madeira'),
-    it('Camarão — Ao molho catupiry'),
-    it('Camarões ao creme de moranga, dendê e alho poró'),
-    it('Carré de Cordeiro — Vinho e ervas', ['glu']),
-    it('Carré de Cordeiro — Manteiga e alho', ['glu']),
-  ]},
-  { num: '2', label: 'Massas', items: [
-    it('Gnocchi ao molho suíço'),
-    it('Gnocchi ao molho de champignons'),
-    it('Caneloni de frango c/ catupiry'),
-    it('Caneloni de camarão c/ catupiry'),
-    it('Penne ao molho de camarão c/ limão'),
-    it('Penne na manteiga'),
-    it('Spaghetti ao frutos do mar c/ açafrão', ['lac']),
-    it('Spaghetti c/ bacon e manjericão'),
-  ]},
-  { num: '5', label: 'Guarnições', items: [
-    it('Paella de frutos do mar', ['glu', 'lac']),
-    it('Arroz branco na manteiga', ['glu', 'lac']),
-    it('Purê de aipim c/ bacon'),
-    it('Batata palha'),
-    it('Arroz à grega', ['glu', 'lac']),
-    it('Arroz c/ brócolis e nozes', ['glu', 'veg']),
-    it('Farofa de camarão / Arroz c/ nozes'),
-    it('Farofa de pão, bacon, castanhas e passas'),
-    it('Purê de batata c/ ervas finas'),
-    it('Batatas assadas c/ alecrim', ['glu', 'veg']),
-    it('Legumes ao vapor c/ tomilho', ['glu', 'lac', 'veg']),
-    it('Legumes salteados c/ bacon e tomilho', ['glu', 'lac']),
-    it('Coração de palmito in natura ao vapor', ['glu', 'lac', 'veg']),
-  ]},
-  { num: '6', label: 'Saladas', items: [
-    it('Pupunha laminada c/ camarões e vinagrete de frutas amarelas', ['glu', 'lac']),
-    it('Burrata artesanal c/ folhas baby, parma e tomates ao pesto', ['glu']),
-    it('Salada de folhas c/ camarões e tomate seco', ['glu', 'lac', 'veg']),
-    it('Mix de folhas c/ mostarda, mel e gorgonzola', ['glu']),
-    it('Folhas c/ palmito, frango, bacon e parmesão'),
-    it('Tomate cereja c/ azeitona e champignon', ['glu', 'lac', 'veg']),
-    it('Folhas c/ peras, gorgonzola e nozes', ['glu']),
-    it('Carpaccio de Filet c/ rúcula e alcaparras', ['glu']),
-    it('Salada de maçã'),
-    it('Salpicão de frango'),
-    it('Ovos de codorna', ['glu', 'lac']),
-    it('Salada de frutos do mar', ['glu', 'lac']),
-  ]},
-];
-
-const TIERS = {
-  1: {
-    name: 'Superior',
-    tagline: 'O essencial servido com sofisticação Indaiá.',
-    price: { value: '149', cents: '90' },
-    features: [
-      { num: '3', label: 'Pratos principais', items: [
-        it('Frango — Bechamel c/ Bacon'),
-        it('Frango — Strogonoff'),
-        it('Picanha Suína — Mostarda e Mel', ['glu', 'lac']),
-        it('Picanha Suína — Barbecue c/ Cebola', ['glu', 'lac']),
-        it('Filet — Strogonoff'),
-      ]},
-      { num: '1', label: 'Massa', items: [
-        it('Spaghetti ao molho Pomodoro c/ manjericão', ['veg']),
-        it('Spaghetti ao pesto de manjericão', ['veg']),
-        it('Penne ao molho suíço', ['veg']),
-        it('Penne na manteiga'),
-      ]},
-      { num: '3', label: 'Guarnições', items: [
-        it('Arroz branco na manteiga', ['glu', 'lac']),
-        it('Batatas assadas c/ alecrim', ['glu', 'veg']),
-        it('Batata palha'),
-        it('Arroz à grega', ['glu', 'lac']),
-        it('Arroz c/ brócolis e nozes', ['glu', 'veg']),
-        it('Legumes ao vapor c/ tomilho', ['glu', 'lac', 'veg']),
-        it('Farofa de pão, bacon, castanhas e passas'),
-        it('Purê de batata c/ ervas finas'),
-      ]},
-      { num: '4', label: 'Saladas', items: [
-        it('Salada de maçã'),
-        it('Salpicão de frango'),
-        it('Mix de folhas verdes', ['glu', 'lac', 'veg']),
-        it('Rúcula c/ tomate seco', ['glu', 'lac', 'veg']),
-        it('Mix de folhas c/ mostarda, mel e gorgonzola', ['glu']),
-        it('Folhas nobres c/ amêndoas, parmesão e balsâmico', ['glu']),
-      ]},
-    ],
-    includes: [],
-    motivation: 'Escolha cada item com a equipe e monte o cardápio perfeito para a sua celebração.',
-    progress: 20,
-  },
-  2: {
-    name: 'Superior II',
-    tagline: 'Variedade ampliada — entradas quentes e camarão à mesa.',
-    price: { value: '169', cents: '90' },
-    features: [
-      { num: '2', label: 'Entrada', items: [
-        it('Escondidinho de Carne Seca'),
-        it('Pães caseiros c/ patês (linguiça e truta)'),
-        it('Mini Risoto de alecrim c/ cogumelos', ['glu']),
-        it('Batata Noissete ao molho tártaro', ['veg']),
-        it('Queijo de colono em cubos', ['glu']),
-        it('Mini Risoto Gorgonzola', ['glu']),
-      ]},
-      { num: '3', label: 'Pratos principais', items: [
-        it('Frango — Bechamel c/ Bacon'),
-        it('Frango — Strogonoff'),
-        it('Picanha Suína — Mostarda e Mel', ['glu', 'lac']),
-        it('Picanha Suína — Barbecue c/ Cebola', ['glu', 'lac']),
-        it('Camarão — Ao molho catupiry'),
-        it('Camarão — Na Moranga'),
-        it('Filet — Molho Mostarda', ['glu']),
-        it('Filet — Molho Madeira'),
-      ]},
-      { num: '2', label: 'Massas', items: [
-        it('Gnocchi ao molho Suíço'),
-        it('Gnocchi ao molho de Champignons'),
-        it('Spaghetti ao Frutos do Mar c/ Açafrão', ['lac']),
-        it('Spaghetti c/ Bacon e manjericão'),
-        it('Penne ao molho de Camarões c/ limão'),
-        it('Penne na Manteiga'),
-      ]},
-      { num: '4', label: 'Guarnições', items: [
-        it('Arroz branco na manteiga', ['glu', 'lac']),
-        it('Batatas assadas c/ alecrim', ['glu', 'veg']),
-        it('Batata palha'),
-        it('Arroz à grega', ['glu', 'lac']),
-        it('Arroz c/ brócolis e nozes', ['glu', 'veg']),
-        it('Legumes ao vapor c/ tomilho', ['glu', 'lac', 'veg']),
-        it('Farofa de pão, bacon, castanhas e passas'),
-        it('Purê de batata c/ ervas finas'),
-        it('Purê de aipim c/ bacon'),
-      ]},
-      { num: '5', label: 'Saladas', items: [
-        it('Salada de maçã'),
-        it('Salpicão de frango'),
-        it('Ovos de codorna', ['glu', 'lac']),
-        it('Salada de folhas c/ camarões e tomate seco', ['glu', 'lac', 'veg']),
-        it('Mix de folhas c/ mostarda, mel e gorgonzola', ['glu']),
-        it('Folhas c/ palmito, frango, bacon e parmesão'),
-        it('Tomate cereja c/ azeitona e champignon', ['glu', 'lac', 'veg']),
-        it('Folhas nobres c/ amêndoas, parmesão e balsâmico', ['glu']),
-      ]},
-    ],
-    includes: [],
-    motivation: 'Um menu com mais escolhas e ingredientes nobres na entrada e nas saladas.',
-    progress: 40,
-  },
-  3: {
-    name: 'Premium',
-    tagline: 'Onde Burrata e Pupunha encontram a sua mesa.',
-    price: { value: '179', cents: '90' },
-    features: [
-      { num: '3', label: 'Entrada', items: [
-        it('Bolinho de peixe'),
-        it('Pães caseiros c/ patês (linguiça e truta)'),
-        it('Mini risoto de alecrim c/ cogumelos', ['glu']),
-        it('Batata Noissete ao molho tártaro', ['veg']),
-        it('Escondidinho de Filet'),
-        it('Mini risoto de alho poró', ['glu']),
-      ]},
-      { num: '4', label: 'Pratos principais', items: [
-        it('Frango — Bechamel c/ Bacon'),
-        it('Frango — Strogonoff'),
-        it('Picanha Suína — Mostarda e Mel', ['glu', 'lac']),
-        it('Picanha Suína — Barbecue c/ Cebola', ['glu', 'lac']),
-        it('Camarão — Ao molho catupiry'),
-        it('Camarões ao creme de moranga, dendê e crocante de alho poró'),
-        it('Filet — Ao molho mostarda', ['glu']),
-        it('Filet — Ao molho madeira'),
-      ]},
-      { num: '2', label: 'Massas', items: [
-        it('Gnocchi ao molho suíço'),
-        it('Gnocchi ao molho de champignons'),
-        it('Spaghetti ao frutos do mar c/ açafrão', ['lac']),
-        it('Spaghetti c/ bacon e manjericão'),
-        it('Penne ao molho de camarão c/ limão'),
-        it('Penne na manteiga'),
-        it('Caneloni de frango c/ catupiry'),
-        it('Caneloni de Camarão c/ catupiry'),
-      ]},
-      { num: '5', label: 'Guarnições', items: [
-        it('Paella de frutos do mar', ['glu', 'lac']),
-        it('Arroz branco na manteiga', ['glu', 'lac']),
-        it('Batatas assadas c/ alecrim', ['glu', 'veg']),
-        it('Batata palha'),
-        it('Arroz à grega', ['glu', 'lac']),
-        it('Arroz c/ brócolis e nozes', ['glu', 'veg']),
-        it('Legumes ao vapor c/ tomilho', ['glu', 'lac', 'veg']),
-        it('Farofa de pão, bacon, castanhas e passas'),
-        it('Purê de batata c/ ervas finas'),
-        it('Purê de aipim c/ bacon'),
-      ]},
-      { num: '5', label: 'Saladas', items: [
-        it('Pupunha laminada c/ camarões e vinagrete de frutas amarelas', ['glu', 'lac']),
-        it('Burrata artesanal c/ folhas baby, parma e tomates ao pesto', ['glu']),
-        it('Salada de maçã'),
-        it('Salpicão de frango'),
-        it('Ovos de codorna', ['glu', 'lac']),
-        it('Salada de folhas c/ camarões e tomate seco', ['glu', 'lac', 'veg']),
-        it('Mix de folhas c/ mostarda, mel e gorgonzola', ['glu']),
-        it('Folhas c/ palmito, frango, bacon e parmesão'),
-        it('Tomate cereja c/ azeitona e champignon', ['glu', 'lac', 'veg']),
-      ]},
-    ],
-    includes: [],
-    motivation: 'Mais variedade, mais sabor, mais autoria — sem subir para o nível executivo.',
-    progress: 60,
-  },
-  4: {
-    name: 'Privilege',
-    tagline: 'Carré de Cordeiro, Salmão e Lanche da Madrugada inclusos.',
-    price: { value: '249', cents: '90' },
-    features: PRIVILEGE_EXCELLENCE_FEATURES,
-    includes: [
-      'Lanche da Madrugada — Tipo III',
-    ],
-    motivation: 'O nível mais escolhido pelos noivos. Cardápio executivo com Lanche da Madrugada já incluso.',
-    progress: 80,
-    badge: 'Mais escolhido',
-  },
-  5: {
-    name: 'Excellence',
-    tagline: 'A experiência Indaiá em sua forma máxima.',
-    price: { value: '279', cents: '90' },
-    features: PRIVILEGE_EXCELLENCE_FEATURES,
-    includes: [
-      'Lanche da Madrugada — Tipo III',
-      'Mesa Mediterrânea',
-    ],
-    motivation: 'A Mesa Mediterrânea recebe seus convidados. Você cuida do brinde — o resto fica conosco.',
-    progress: 100,
-    badge: 'Experiência completa',
-  },
-};
-
 const DIET_LABELS = { glu: 'Sem Glúten', lac: 'Sem Lactose', veg: 'Vegano' };
+let TIERS = {};
 
 /* ---------- Render tier panel ---------- */
 function renderTier(tier) {
@@ -396,7 +141,6 @@ function setTier(tier) {
     tierPanel.classList.remove('is-changing');
   }, 220);
 
-  // Fill progress track
   const fillMap = { 1: 0, 2: 25, 3: 50, 4: 75, 5: 100 };
   if (tierFill) tierFill.style.width = `${fillMap[tier]}%`;
 }
@@ -408,15 +152,24 @@ tierButtons.forEach(btn => {
   });
 });
 
-// Initial render — start on Privilege (the most-chosen one)
-setTier(4);
+/* ---------- Load data from data.json, then initialize ---------- */
+fetch('/data.json?_=' + Date.now())
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(json => {
+    TIERS = Object.fromEntries(
+      Object.entries(json.tiers).map(([k, v]) => [Number(k), v])
+    );
+    setTier(4);
+  })
+  .catch(() => {
+    if (tierPanel) tierPanel.innerHTML = '<p style="padding:24px 20px;color:#999;font-size:14px">Erro ao carregar cardápio. Recarregue a página.</p>';
+  });
 
 /* ---------- Reveal on scroll ---------- */
 const reveals = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
   entries.forEach((entry, idx) => {
     if (entry.isIntersecting) {
-      // Stagger lightly
       entry.target.style.transitionDelay = `${Math.min(idx * 60, 240)}ms`;
       entry.target.classList.add('is-visible');
       io.unobserve(entry.target);
@@ -428,18 +181,15 @@ reveals.forEach(el => io.observe(el));
 
 /* ---------- Nav scroll state ---------- */
 const nav = document.getElementById('nav');
-let lastScroll = 0;
 window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (nav) nav.classList.toggle('is-scrolled', y > 30);
-  lastScroll = y;
+  if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 30);
 }, { passive: true });
 
 /* ---------- Year in footer ---------- */
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* ---------- Smooth focus on tier CTA scroll ---------- */
+/* ---------- Smooth scroll ---------- */
 document.addEventListener('click', (e) => {
   const link = e.target.closest('a[href^="#"]');
   if (!link) return;
@@ -506,7 +256,7 @@ function anyModalOpen() {
 }
 
 /* =========================================================
-   PHOTO POPUP — foto do produto sobre os modais
+   PHOTO POPUP
    ========================================================= */
 const photoPopup = document.getElementById('photoPopup');
 const photoPopupImg = document.getElementById('photoPopupImg');
@@ -525,7 +275,6 @@ function closePhotoPopup() {
   if (!photoPopup) return;
   photoPopup.classList.remove('is-open');
   photoPopup.setAttribute('aria-hidden', 'true');
-  // Limpa o src depois da animação pra liberar memória
   setTimeout(() => { if (!photoPopup.classList.contains('is-open')) photoPopupImg.src = ''; }, 400);
 }
 
@@ -537,40 +286,34 @@ function isPhotoPopupOpen() {
    Delegação geral de clicks
    ========================================================= */
 document.addEventListener('click', (e) => {
-  // Fechar photo popup tem prioridade
   if (e.target.closest('[data-photo-close]')) {
     closePhotoPopup();
     return;
   }
-  // Abrir foto de produto
   const photoTrigger = e.target.closest('[data-photo]');
   if (photoTrigger) {
     e.preventDefault();
     openPhotoPopup(photoTrigger.dataset.photo, photoTrigger.dataset.photoName);
     return;
   }
-  // Triggers de modais de categoria
   const catTrigger = e.target.closest('[data-cat-trigger]');
   if (catTrigger) {
     e.preventDefault();
     openCategoryModal(Number(catTrigger.dataset.catTier), Number(catTrigger.dataset.catIdx));
     return;
   }
-  // Triggers de modais principais
   const trigger = e.target.closest('[data-modal-trigger]');
   if (trigger) {
     e.preventDefault();
     openModalByKey(trigger.dataset.modalTrigger);
     return;
   }
-  // Fechar modal principal
   const closer = e.target.closest('[data-modal-close]');
   if (closer && anyModalOpen()) {
     closeAllModals();
   }
 });
 
-// Teclado: Enter/Espaço em items com foto, ESC fecha tudo
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (isPhotoPopupOpen()) { closePhotoPopup(); return; }
