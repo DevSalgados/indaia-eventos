@@ -9,10 +9,10 @@ const TIERS = {
     tagline: 'O essencial servido com sofisticação Indaiá.',
     price: { value: '149', cents: '90' },
     features: [
-      { num: '3', label: 'Pratos principais', desc: 'Frango, Picanha Suína e Filet em molhos clássicos da casa.' },
-      { num: '1', label: 'Massa', desc: 'Spaghetti ao Pomodoro, pesto, Penne ao suíço ou na manteiga.' },
-      { num: '3', label: 'Guarnições', desc: 'Arroz à grega, batatas ao alecrim, legumes ao tomilho.' },
-      { num: '4', label: 'Saladas', desc: 'Folhas nobres com amêndoas e parmesão, rúcula com tomate seco.' },
+      { num: '3', label: 'Pratos principais', items: ['Frango', 'Picanha Suína', 'Filet em molhos clássicos da casa'] },
+      { num: '1', label: 'Massa', items: ['Spaghetti ao Pomodoro', 'Spaghetti ao Pesto', 'Penne ao Suíço', 'Penne na Manteiga'] },
+      { num: '3', label: 'Guarnições', items: ['Arroz à grega', 'Batatas ao alecrim', 'Legumes ao tomilho'] },
+      { num: '4', label: 'Saladas', items: ['Folhas nobres com amêndoas e parmesão', 'Rúcula com tomate seco'] },
     ],
     includes: [],
     motivation: 'Escolha cada item com a equipe e monte o cardápio perfeito para a sua celebração.',
@@ -23,11 +23,11 @@ const TIERS = {
     tagline: 'Variedade ampliada — entradas quentes e camarão à mesa.',
     price: { value: '169', cents: '90' },
     features: [
-      { num: '2', label: 'Entradas', desc: 'Escondidinho de carne seca, mini risoto Gorgonzola, queijo de colono.' },
-      { num: '3', label: 'Pratos principais', desc: 'Camarão à moranga, Filet ao Madeira e os clássicos da casa.' },
-      { num: '2', label: 'Massas', desc: 'Gnocchi ao Champignons, Penne ao molho de camarões com limão.' },
-      { num: '4', label: 'Guarnições', desc: 'Purê de aipim com bacon entra na seleção.' },
-      { num: '5', label: 'Saladas', desc: 'Folhas com camarões e tomate seco, folhas nobres com balsâmico.' },
+      { num: '2', label: 'Entradas', items: ['Escondidinho de carne seca', 'Mini risoto Gorgonzola', 'Queijo de colono'] },
+      { num: '3', label: 'Pratos principais', items: ['Camarão à moranga', 'Filet ao Madeira', 'Clássicos da casa'] },
+      { num: '2', label: 'Massas', items: ['Gnocchi ao Champignons', 'Penne ao molho de camarões com limão'] },
+      { num: '4', label: 'Guarnições', items: ['Purê de aipim com bacon', 'Arroz à grega', 'Batatas ao alecrim', 'Legumes ao tomilho'] },
+      { num: '5', label: 'Saladas', items: ['Folhas com camarões e tomate seco', 'Folhas nobres com balsâmico'] },
     ],
     includes: [],
     motivation: 'Um menu com mais escolhas e ingredientes nobres na entrada e nas saladas.',
@@ -38,11 +38,11 @@ const TIERS = {
     tagline: 'Onde Burrata e Pupunha encontram a sua mesa.',
     price: { value: '179', cents: '90' },
     features: [
-      { num: '3', label: 'Entradas', desc: 'Bolinho de peixe, mini risoto de alho poró, escondidinho de Filet.' },
-      { num: '4', label: 'Pratos principais', desc: 'Camarões ao creme de moranga e dendê, Filet ao Madeira.' },
-      { num: '2', label: 'Massas', desc: 'Caneloni de frango e de camarão com catupiry, gnocchi e spaghetti.' },
-      { num: '5', label: 'Guarnições', desc: 'Paella de frutos do mar entra como opção.' },
-      { num: '5', label: 'Saladas', desc: 'Burrata artesanal com folhas baby, Pupunha laminada com camarões.' },
+      { num: '3', label: 'Entradas', items: ['Bolinho de peixe', 'Mini risoto de alho poró', 'Escondidinho de Filet'] },
+      { num: '4', label: 'Pratos principais', items: ['Camarões ao creme de moranga e dendê', 'Filet ao Madeira'] },
+      { num: '2', label: 'Massas', items: ['Caneloni de frango com catupiry', 'Caneloni de camarão com catupiry', 'Gnocchi', 'Spaghetti'] },
+      { num: '5', label: 'Guarnições', items: ['Paella de frutos do mar', 'Arroz à grega', 'Batatas ao alecrim', 'Legumes ao tomilho'] },
+      { num: '5', label: 'Saladas', items: ['Burrata artesanal com folhas baby', 'Pupunha laminada com camarões'] },
     ],
     includes: [],
     motivation: 'Mais variedade, mais sabor, mais autoria — sem subir para o nível executivo.',
@@ -53,11 +53,11 @@ const TIERS = {
     tagline: 'Carré de Cordeiro, Salmão e Lanche da Madrugada inclusos.',
     price: { value: '249', cents: '90' },
     features: [
-      { num: '4', label: 'Entradas', desc: 'Mini paella de frutos do mar, mini caldeirada, escondidinho de camarão.' },
-      { num: '4', label: 'Pratos principais', desc: 'Carré de Cordeiro ao vinho, Salmão A Belle Meunière, Camarões.' },
-      { num: '2', label: 'Massas', desc: 'Frutos do mar com açafrão, caneloni de camarão, gnocchi ao suíço.' },
-      { num: '5', label: 'Guarnições', desc: 'Coração de palmito ao vapor, legumes salteados, paella.' },
-      { num: '6', label: 'Saladas', desc: 'Carpaccio de Filet com rúcula, folhas com peras, gorgonzola e nozes.' },
+      { num: '4', label: 'Entradas', items: ['Mini paella de frutos do mar', 'Mini caldeirada', 'Escondidinho de camarão'] },
+      { num: '4', label: 'Pratos principais', items: ['Carré de Cordeiro ao vinho', 'Salmão A Belle Meunière', 'Camarões'] },
+      { num: '2', label: 'Massas', items: ['Frutos do mar com açafrão', 'Caneloni de camarão', 'Gnocchi ao Suíço'] },
+      { num: '5', label: 'Guarnições', items: ['Coração de palmito ao vapor', 'Legumes salteados', 'Paella'] },
+      { num: '6', label: 'Saladas', items: ['Carpaccio de Filet com rúcula', 'Folhas com peras, gorgonzola e nozes'] },
     ],
     includes: [
       'Lanche da Madrugada — Tipo III',
@@ -71,11 +71,11 @@ const TIERS = {
     tagline: 'A experiência Indaiá em sua forma máxima.',
     price: { value: '279', cents: '90' },
     features: [
-      { num: '4', label: 'Entradas', desc: 'A mesma seleção do Privilege, com a Mesa Mediterrânea complementando.' },
-      { num: '4', label: 'Pratos principais', desc: 'Carré de Cordeiro à manteiga e alho, Salmão ao molho de camarão.' },
-      { num: '2', label: 'Massas', desc: 'Caneloni de camarão, frutos do mar com açafrão, gnocchi ao champignons.' },
-      { num: '5', label: 'Guarnições', desc: 'Paella de frutos do mar, coração de palmito ao vapor.' },
-      { num: '6', label: 'Saladas', desc: 'Burrata artesanal, Carpaccio, frutos do mar, peras com gorgonzola.' },
+      { num: '4', label: 'Entradas', items: ['Mini paella de frutos do mar', 'Mini caldeirada', 'Escondidinho de camarão', 'Mesa Mediterrânea complementando'] },
+      { num: '4', label: 'Pratos principais', items: ['Carré de Cordeiro à manteiga e alho', 'Salmão ao molho de camarão'] },
+      { num: '2', label: 'Massas', items: ['Caneloni de camarão', 'Frutos do mar com açafrão', 'Gnocchi ao Champignons'] },
+      { num: '5', label: 'Guarnições', items: ['Paella de frutos do mar', 'Coração de palmito ao vapor'] },
+      { num: '6', label: 'Saladas', items: ['Burrata artesanal', 'Carpaccio', 'Frutos do mar', 'Peras com gorgonzola'] },
     ],
     includes: [
       'Lanche da Madrugada — Tipo III',
@@ -139,7 +139,9 @@ function renderTier(tier) {
         <div class="tier-feature">
           <div class="tier-feature-num">${f.num}</div>
           <span class="tier-feature-label">${f.label}</span>
-          <p class="tier-feature-desc">${f.desc}</p>
+          <ul class="tier-feature-list">
+            ${f.items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
         </div>
       `).join('')}
     </div>

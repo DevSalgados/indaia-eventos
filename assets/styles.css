@@ -878,6 +878,31 @@ em, .italic {
   color: var(--ink-soft);
   line-height: 1.5;
 }
+.tier-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tier-feature-list li {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  padding-left: 14px;
+  position: relative;
+}
+.tier-feature-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--olive);
+}
 
 .tier-includes {
   margin-bottom: 38px;
