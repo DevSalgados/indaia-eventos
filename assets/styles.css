@@ -888,42 +888,39 @@ em, .italic {
   color: var(--ink-soft);
   line-height: 1.5;
 }
-.tier-feature-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.tier-feature-btn {
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
-.tier-feature-list li {
-  font-size: 0.84rem;
+.tier-feature-count {
+  font-size: 0.85rem;
   color: var(--ink-soft);
-  line-height: 1.4;
-  padding-left: 14px;
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tier-feature-more {
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
+  margin-top: 14px;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--olive);
 }
-.tier-feature-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--olive);
-}
-.tier-feature-name { flex: 1 1 auto; min-width: 0; }
+.tier-feature-btn:hover .tier-feature-more { color: var(--olive-dark, var(--olive)); }
+
+/* Bullets coloridos por restrição alimentar */
 .diet-dots {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   flex-shrink: 0;
-  padding-top: 4px;
 }
 .diet-dot {
   display: inline-block;
@@ -941,21 +938,51 @@ em, .italic {
   flex-wrap: wrap;
   justify-content: center;
   gap: 22px;
-  margin-bottom: 32px;
   padding: 14px 22px;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  background: var(--cream);
+  border-top: 1px solid var(--border-light);
 }
 .diet-legend span {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--on-dark);
   font-weight: 600;
+}
+
+/* Modal de categoria — itens listados com bullets de restrição */
+.modal-cat-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.modal-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  border: 1px solid rgba(243, 237, 224, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(243, 237, 224, 0.04);
+  color: var(--on-dark);
+  font-size: 0.92rem;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: catItemIn 0.4s var(--easing) forwards;
+  animation-delay: calc(var(--i, 0) * 30ms);
+}
+@keyframes catItemIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-cat-item-name { flex: 1 1 auto; }
+.modal-cat-foot {
+  margin-top: auto;
 }
 
 .tier-includes {

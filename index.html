@@ -545,6 +545,35 @@
     </div>
   </div>
 
+  <!-- MODAL: Categoria de menu (Pratos, Massas, Saladas, etc.) -->
+  <div class="modal-lanche modal-cat" id="modalCategory" role="dialog" aria-modal="true" aria-labelledby="modalCatTitle" aria-hidden="true">
+    <div class="modal-lanche-backdrop" data-modal-close></div>
+
+    <div class="modal-lanche-content" role="document">
+      <button class="modal-lanche-close" data-modal-close aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+
+      <header class="modal-lanche-head">
+        <span class="modal-lanche-eyebrow" id="modalCatEyebrow"></span>
+        <h2 id="modalCatTitle"></h2>
+        <p class="modal-lanche-tagline" id="modalCatChoose"></p>
+      </header>
+
+      <ul class="modal-cat-items" id="modalCatItems"></ul>
+
+      <footer class="modal-cat-foot">
+        <div class="diet-legend" aria-label="Legenda de restrições alimentares">
+          <span><span class="diet-dot diet-dot--glu"></span>Sem Glúten</span>
+          <span><span class="diet-dot diet-dot--lac"></span>Sem Lactose</span>
+          <span><span class="diet-dot diet-dot--veg"></span>Vegano</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
   <script src="assets/script.js" defer></script>
 </body>
 </html>

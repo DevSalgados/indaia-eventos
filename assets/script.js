@@ -308,25 +308,16 @@ function renderTier(tier) {
     </div>
 
     <div class="tier-features">
-      ${data.features.map(f => `
-        <div class="tier-feature">
+      ${data.features.map((f, idx) => {
+        const opts = `${f.num} opç${Number(f.num) === 1 ? 'ão' : 'ões'}`;
+        return `
+        <button type="button" class="tier-feature tier-feature-btn" data-cat-trigger data-cat-tier="${tier}" data-cat-idx="${idx}" aria-label="Ver todas as opções de ${f.label}">
           <span class="tier-feature-label">${f.label}</span>
-          <span class="tier-feature-choose">Escolha ${f.num} opç${Number(f.num) === 1 ? 'ão' : 'ões'}*</span>
-          <ul class="tier-feature-list">
-            ${f.items.map(item => `
-              <li>
-                <span class="tier-feature-name">${item.name}</span>
-                ${item.tags.length ? `<span class="diet-dots">${item.tags.map(t => `<span class="diet-dot diet-dot--${t}" aria-label="${DIET_LABELS[t]}" title="${DIET_LABELS[t]}"></span>`).join('')}</span>` : ''}
-              </li>`).join('')}
-          </ul>
-        </div>
-      `).join('')}
-    </div>
-
-    <div class="diet-legend" aria-label="Legenda de restrições alimentares">
-      <span><span class="diet-dot diet-dot--glu"></span>Sem Glúten</span>
-      <span><span class="diet-dot diet-dot--lac"></span>Sem Lactose</span>
-      <span><span class="diet-dot diet-dot--veg"></span>Vegano</span>
+          <span class="tier-feature-choose">Escolha ${opts}*</span>
+          <span class="tier-feature-count">${f.items.length} opções disponíveis</span>
+          <span class="tier-feature-more">Ver opções <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>`;
+      }).join('')}
     </div>
 
     ${includesBlock}
@@ -464,9 +455,32 @@ document.addEventListener('click', (e) => {
    MODALS — Lanche da Madrugada e Mesa Mediterrânea
    ========================================================= */
 const MODAL_MAP = {
-  lanche: document.getElementById('modalLanche'),
-  mesa:   document.getElementById('modalMesa'),
+  lanche:   document.getElementById('modalLanche'),
+  mesa:     document.getElementById('modalMesa'),
+  category: document.getElementById('modalCategory'),
 };
+
+function openCategoryModal(tier, catIdx) {
+  const data = TIERS[tier];
+  if (!data) return;
+  const cat = data.features[catIdx];
+  if (!cat) return;
+
+  const opts = `${cat.num} opç${Number(cat.num) === 1 ? 'ão' : 'ões'}`;
+  document.getElementById('modalCatEyebrow').textContent = `Menu ${tier.toString().padStart(2, '0')} · ${data.name}`;
+  document.getElementById('modalCatTitle').innerHTML = cat.label;
+  document.getElementById('modalCatChoose').textContent = `Escolha ${opts}* dentro da seleção abaixo`;
+
+  const itemsEl = document.getElementById('modalCatItems');
+  itemsEl.innerHTML = cat.items.map((item, i) => `
+    <li class="modal-cat-item" style="--i: ${i}">
+      <span class="modal-cat-item-name">${item.name}</span>
+      ${item.tags.length ? `<span class="diet-dots">${item.tags.map(t => `<span class="diet-dot diet-dot--${t}" aria-label="${DIET_LABELS[t]}" title="${DIET_LABELS[t]}"></span>`).join('')}</span>` : ''}
+    </li>
+  `).join('');
+
+  openModalByKey('category');
+}
 
 function openModalByKey(key) {
   const m = MODAL_MAP[key];
@@ -493,6 +507,12 @@ function anyModalOpen() {
 
 // Triggers e closers via delegação
 document.addEventListener('click', (e) => {
+  const catTrigger = e.target.closest('[data-cat-trigger]');
+  if (catTrigger) {
+    e.preventDefault();
+    openCategoryModal(Number(catTrigger.dataset.catTier), Number(catTrigger.dataset.catIdx));
+    return;
+  }
   const trigger = e.target.closest('[data-modal-trigger]');
   if (trigger) {
     e.preventDefault();
