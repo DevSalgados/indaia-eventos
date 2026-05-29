@@ -161,11 +161,56 @@ const tierButtons = document.querySelectorAll('.tier-btn');
 const tierPanel = document.getElementById('tierPanel');
 const tierFill = document.getElementById('tierFill');
 
+/* ---------- Serviços inclusos — estado conforme menu ---------- */
+const servicesGrid = document.getElementById('servicesGrid');
+const servicesEyebrow = document.getElementById('servicesEyebrow');
+
+function updateServicesForTier(tier) {
+  if (!servicesGrid) return;
+  const lanche = servicesGrid.querySelector('[data-service="lanche"]');
+  const mesa = servicesGrid.querySelector('[data-service="mesa"]');
+  if (!lanche || !mesa) return;
+
+  const setCard = (card, { hidden = false, tierLabel, ribbon, ribbonHidden = true, exclusive = false }) => {
+    card.hidden = hidden;
+    card.classList.toggle('is-exclusive', exclusive);
+    const tierEl = card.querySelector('[data-service-tier]');
+    const ribbonEl = card.querySelector('[data-service-ribbon]');
+    if (tierEl && tierLabel) tierEl.textContent = tierLabel;
+    if (ribbonEl) {
+      ribbonEl.hidden = ribbonHidden;
+      if (!ribbonHidden && ribbon) ribbonEl.textContent = ribbon;
+    }
+  };
+
+  if (tier === 5) {
+    servicesEyebrow.textContent = 'Inclusos no seu menu Excellence';
+    setCard(lanche, { tierLabel: 'Incluso · Excellence', ribbon: 'Incluso no seu menu', ribbonHidden: false });
+    setCard(mesa, { tierLabel: 'Incluso · Excellence', ribbon: 'Exclusivo Excellence', ribbonHidden: false, exclusive: true });
+    servicesGrid.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
+    servicesGrid.style.maxWidth = '820px';
+  } else if (tier === 4) {
+    servicesEyebrow.textContent = 'Incluso no seu menu Privilege';
+    setCard(lanche, { tierLabel: 'Incluso · Privilege', ribbon: 'Incluso no seu menu', ribbonHidden: false });
+    setCard(mesa, { hidden: true });
+    servicesGrid.style.gridTemplateColumns = 'minmax(0, 1fr)';
+    servicesGrid.style.maxWidth = '420px';
+  } else {
+    servicesEyebrow.textContent = 'Adicionais opcionais para o seu menu';
+    setCard(lanche, { tierLabel: 'Adicional sob consulta', ribbon: 'Pode ser adicionado', ribbonHidden: false });
+    setCard(mesa, { tierLabel: 'Adicional sob consulta', ribbon: 'Pode ser adicionado', ribbonHidden: false });
+    servicesGrid.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
+    servicesGrid.style.maxWidth = '820px';
+  }
+}
+
 function setTier(tier) {
   tierButtons.forEach(b => {
     const isActive = Number(b.dataset.tier) === tier;
     b.setAttribute('aria-selected', isActive);
   });
+
+  updateServicesForTier(tier);
 
   if (!tierPanel) return;
 
