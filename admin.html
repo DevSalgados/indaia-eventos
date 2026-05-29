@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · Indaiá Eventos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #a8965e; --gold-d: #8a7848; --ink: #111; --muted: #777; --border: #e4e4e4; --bg: #f2f1ef; --white: #fff; }
+    body { font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink); background: var(--bg); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #loginWrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #1a1a1a; }
+    .login-card { background: var(--white); border-radius: 14px; padding: 44px 40px; width: 360px; box-shadow: 0 24px 60px rgba(0,0,0,.35); display: flex; flex-direction: column; gap: 12px; }
+    .login-brand { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; color: var(--gold); text-align: center; }
+    .login-sub { font-size: 12px; color: var(--muted); text-align: center; margin-top: -6px; }
+    .login-err { font-size: 12px; color: #c44; background: #fff0f0; border: 1px solid #f5c0c0; border-radius: 7px; padding: 8px 12px; display: none; }
+    .login-err.show { display: block; }
+    .login-card input[type=password] { border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 14px; width: 100%; outline: none; transition: border-color .2s; font-family: inherit; }
+    .login-card input[type=password]:focus { border-color: var(--gold); }
+    .btn-gold { background: var(--gold); color: #fff; border: none; border-radius: 8px; padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .2s; font-family: inherit; }
+    .btn-gold:hover { background: var(--gold-d); }
+    .btn-gold:disabled { background: #bbb; cursor: default; }
+    .login-card .btn-gold { width: 100%; }
+
+    /* ── APP LAYOUT ── */
+    #appWrap { display: flex; flex-direction: column; height: 100vh; }
+    .topbar { height: 54px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 14px; flex-shrink: 0; position: sticky; top: 0; z-index: 20; }
+    .topbar-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); margin-right: 4px; }
+    .topbar-brand em { font-style: normal; font-size: 11px; font-family: 'Inter', sans-serif; color: var(--muted); font-weight: 500; letter-spacing: .04em; }
+    .topbar-sep { width: 1px; height: 20px; background: var(--border); }
+    #statusMsg { flex: 1; font-size: 12px; color: var(--muted); }
+    #statusMsg.saving { color: var(--gold); }
+    #statusMsg.success { color: #3a8c5c; }
+    #statusMsg.error { color: #c44; }
+    .btn-ghost { background: none; border: 1.5px solid var(--border); border-radius: 7px; padding: 7px 14px; font-size: 12px; color: var(--muted); cursor: pointer; font-family: inherit; transition: all .15s; }
+    .btn-ghost:hover { border-color: #aaa; color: var(--ink); }
+
+    .layout { display: flex; flex: 1; overflow: hidden; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { width: 200px; background: var(--white); border-right: 1px solid var(--border); overflow-y: auto; padding: 16px 0; flex-shrink: 0; }
+    .sb-label { font-size: 10px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: .08em; padding: 0 16px 10px; }
+    .sb-btn { display: block; width: 100%; border: none; background: none; text-align: left; padding: 9px 16px; cursor: pointer; position: relative; transition: background .15s; }
+    .sb-btn:hover { background: #fdf8f0; }
+    .sb-btn.active { background: #fdf8f0; }
+    .sb-btn.active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); border-radius: 0 2px 2px 0; }
+    .sb-num { display: block; font-size: 10px; color: var(--muted); }
+    .sb-name { display: block; font-size: 13px; font-weight: 500; color: var(--ink); }
+    .sb-btn.active .sb-name { color: var(--gold); }
+
+    /* ── MAIN CONTENT ── */
+    .main { flex: 1; overflow-y: auto; padding: 28px 32px; }
+    .main-title { font-size: 20px; font-weight: 600; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
+    .main-title small { font-size: 12px; font-weight: 400; color: var(--muted); background: #f0f0f0; border-radius: 5px; padding: 3px 8px; }
+
+    /* ── CARDS ── */
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 18px; overflow: hidden; }
+    .card-head { padding: 14px 20px; border-bottom: 1px solid #f4f4f4; display: flex; align-items: center; justify-content: space-between; }
+    .card-head h3 { font-size: 13px; font-weight: 600; color: #444; }
+    .card-body { padding: 20px; }
+
+    /* ── FORM FIELDS ── */
+    .field-row { display: flex; gap: 14px; margin-bottom: 14px; }
+    .field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; }
+    .field label { font-size: 11px; color: var(--muted); font-weight: 500; }
+    .field input[type=text], .field textarea { border: 1.5px solid var(--border); border-radius: 7px; padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; transition: border-color .2s; color: var(--ink); width: 100%; }
+    .field input[type=text]:focus, .field textarea:focus { border-color: var(--gold); }
+    .field textarea { resize: vertical; min-height: 70px; }
+    .price-row { display: flex; align-items: center; gap: 5px; }
+    .price-row span { font-size: 14px; color: var(--muted); }
+    .price-row input { width: 72px; border: 1.5px solid var(--border); border-radius: 7px; padding: 8px 10px; font-size: 13px; font-family: inherit; outline: none; transition: border-color .2s; }
+    .price-row input:focus { border-color: var(--gold); }
+
+    /* ── CATEGORIES ── */
+    .cat-block { margin-bottom: 24px; }
+    .cat-block:last-child { margin-bottom: 0; }
+    .cat-divider { border: none; border-top: 1px solid #f0f0f0; margin: 20px 0; }
+    .cat-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .cat-label-in { flex: 1; border: none; background: transparent; font-size: 14px; font-weight: 600; color: #444; outline: none; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: border-color .2s; }
+    .cat-label-in:focus { border-bottom-color: var(--gold); }
+    .cat-num-wrap { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .cat-num-in { width: 38px; border: 1.5px solid var(--border); border-radius: 5px; padding: 4px 6px; font-size: 12px; font-family: inherit; text-align: center; outline: none; }
+    .cat-num-in:focus { border-color: var(--gold); }
+
+    /* ── ITEMS ── */
+    .items-list { display: flex; flex-direction: column; gap: 7px; }
+    .item-row { display: flex; align-items: center; gap: 8px; background: #fafafa; border: 1px solid #ededed; border-radius: 8px; padding: 7px 10px; transition: border-color .15s; }
+    .item-row:hover { border-color: #d8d8d8; }
+    .item-name-in { flex: 1; border: none; background: transparent; font-size: 13px; outline: none; color: var(--ink); min-width: 0; }
+    .item-name-in::placeholder { color: #ccc; }
+    .tag-grp { display: flex; gap: 4px; flex-shrink: 0; }
+    .tag-btn { border: 1.5px solid var(--border); background: var(--white); border-radius: 5px; padding: 3px 7px; font-size: 10px; font-weight: 600; cursor: pointer; color: #ccc; transition: all .15s; line-height: 1.4; }
+    .tag-btn.on.glu { background: #eaf4ea; border-color: #5a9e5a; color: #3a7a3a; }
+    .tag-btn.on.lac { background: #eaf0fa; border-color: #4a7ec8; color: #2a5ea8; }
+    .tag-btn.on.veg { background: #f3eafa; border-color: #9a60b8; color: #7a3a98; }
+    .btn-x { border: none; background: none; cursor: pointer; color: #ccc; font-size: 18px; line-height: 1; padding: 0 2px; flex-shrink: 0; transition: color .15s; }
+    .btn-x:hover { color: #c44; }
+    .btn-add-item { display: flex; align-items: center; gap: 6px; width: 100%; border: 1.5px dashed #d4d4d4; background: none; border-radius: 7px; padding: 8px 12px; font-size: 12px; color: #bbb; cursor: pointer; margin-top: 8px; transition: all .2s; font-family: inherit; }
+    .btn-add-item:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── INCLUDES ── */
+    .includes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+    .include-row { display: flex; align-items: center; gap: 8px; }
+    .include-row input { flex: 1; border: 1.5px solid var(--border); border-radius: 7px; padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; }
+    .include-row input:focus { border-color: var(--gold); }
+    .btn-add-inc { display: flex; align-items: center; gap: 6px; border: 1.5px dashed #d4d4d4; background: none; border-radius: 7px; padding: 8px 12px; font-size: 12px; color: #bbb; cursor: pointer; transition: all .2s; font-family: inherit; }
+    .btn-add-inc:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginWrap">
+  <div class="login-card">
+    <div class="login-brand">Indaiá</div>
+    <div class="login-sub">Painel de Administração · Buffet</div>
+    <div class="login-err" id="loginErr"></div>
+    <input type="password" id="pwInput" placeholder="Senha de acesso" autocomplete="current-password">
+    <button class="btn-gold" id="btnLogin">Entrar</button>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="appWrap" hidden>
+  <header class="topbar">
+    <span class="topbar-brand">Indaiá <em>Admin</em></span>
+    <div class="topbar-sep"></div>
+    <span id="statusMsg"></span>
+    <button class="btn-gold" id="btnSave">Salvar alterações</button>
+    <button class="btn-ghost" id="btnLogout">Sair</button>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="main" id="mainContent"></main>
+  </div>
+</div>
+
+<script>
+/* ── State ── */
+let pw = '';
+let DATA = null;
+let curTier = '1';
+
+/* ── DOM refs ── */
+const loginWrap = document.getElementById('loginWrap');
+const appWrap = document.getElementById('appWrap');
+const loginErr = document.getElementById('loginErr');
+const pwInput = document.getElementById('pwInput');
+const btnLogin = document.getElementById('btnLogin');
+const btnSave = document.getElementById('btnSave');
+const btnLogout = document.getElementById('btnLogout');
+const statusEl = document.getElementById('statusMsg');
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.getElementById('mainContent');
+
+/* ── Login ── */
+btnLogin.addEventListener('click', doLogin);
+pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+async function doLogin() {
+  const entered = pwInput.value.trim();
+  if (!entered) return;
+  btnLogin.textContent = 'Verificando...';
+  btnLogin.disabled = true;
+  loginErr.className = 'login-err';
+
+  try {
+    const r = await fetch('/api/update', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({password: entered, data: null})
+    });
+    if (r.status === 401) {
+      showLoginErr('Senha incorreta. Tente novamente.');
+      return;
+    }
+    pw = entered;
+    const dr = await fetch('/data.json?_=' + Date.now());
+    DATA = await dr.json();
+    loginWrap.hidden = true;
+    appWrap.hidden = false;
+    renderSidebar();
+    selectTier('1');
+  } catch(e) {
+    showLoginErr('Erro de conexão.');
+  } finally {
+    btnLogin.textContent = 'Entrar';
+    btnLogin.disabled = false;
+  }
+}
+
+function showLoginErr(msg) {
+  loginErr.textContent = msg;
+  loginErr.className = 'login-err show';
+}
+
+/* ── Logout ── */
+btnLogout.addEventListener('click', () => {
+  pw = ''; DATA = null; curTier = '1';
+  appWrap.hidden = true;
+  loginWrap.hidden = false;
+  pwInput.value = '';
+  loginErr.className = 'login-err';
+});
+
+/* ── Save ── */
+btnSave.addEventListener('click', doSave);
+
+async function doSave() {
+  btnSave.disabled = true;
+  setStatus('Salvando no site...', 'saving');
+  try {
+    const r = await fetch('/api/update', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({password: pw, data: DATA})
+    });
+    if (!r.ok) {
+      const e = await r.json().catch(() => ({}));
+      throw new Error(e.error || `HTTP ${r.status}`);
+    }
+    setStatus('Salvo! O site atualiza em ~30s.', 'success');
+    setTimeout(() => setStatus('', ''), 5000);
+  } catch(e) {
+    setStatus('Erro: ' + e.message, 'error');
+  } finally {
+    btnSave.disabled = false;
+  }
+}
+
+function setStatus(msg, cls) {
+  statusEl.textContent = msg;
+  statusEl.className = cls || '';
+}
+
+/* ── Sidebar ── */
+function renderSidebar() {
+  sidebar.innerHTML = '<div class="sb-label">Menus</div>' +
+    Object.entries(DATA.tiers).map(([n, t]) =>
+      `<button class="sb-btn${n === curTier ? ' active' : ''}" data-tier="${n}" onclick="selectTier('${n}')">
+        <span class="sb-num">Menu ${n.padStart(2,'0')}</span>
+        <span class="sb-name">${esc(t.name)}</span>
+      </button>`
+    ).join('');
+}
+
+function selectTier(n) {
+  curTier = n;
+  sidebar.querySelectorAll('.sb-btn').forEach(b => b.classList.toggle('active', b.dataset.tier === n));
+  renderMain();
+}
+
+/* ── Main ── */
+function renderMain() {
+  const t = DATA.tiers[curTier];
+  mainContent.innerHTML = `
+    <div class="main-title">
+      Menu ${curTier.padStart(2,'0')} · ${esc(t.name)}
+      ${t.badge ? `<small>${esc(t.badge)}</small>` : ''}
+    </div>
+
+    <!-- Basic info -->
+    <div class="card">
+      <div class="card-head"><h3>Informações básicas</h3></div>
+      <div class="card-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Nome do menu</label>
+            <input type="text" value="${esc(t.name)}" oninput="setField('name',this.value)">
+          </div>
+          <div class="field" style="flex:0 0 auto">
+            <label>Preço por pessoa</label>
+            <div class="price-row">
+              <span>R$</span>
+              <input type="text" style="width:70px" value="${esc(t.price.value)}" oninput="setPrice('value',this.value)">
+              <span>,</span>
+              <input type="text" style="width:48px" value="${esc(t.price.cents)}" oninput="setPrice('cents',this.value)">
+            </div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Frase de destaque (tagline)</label>
+            <input type="text" value="${esc(t.tagline)}" oninput="setField('tagline',this.value)">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Descrição (abaixo do botão de WhatsApp)</label>
+            <textarea oninput="setField('motivation',this.value)">${esc(t.motivation)}</textarea>
+          </div>
+        </div>
+        ${t.badge !== undefined ? `
+        <div class="field-row">
+          <div class="field">
+            <label>Badge (ex: "Mais escolhido")</label>
+            <input type="text" value="${esc(t.badge||'')}" oninput="setField('badge',this.value)">
+          </div>
+        </div>` : ''}
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="card">
+      <div class="card-head"><h3>Categorias do cardápio</h3></div>
+      <div class="card-body" id="catsContainer">
+        ${t.features.map((cat, ci) => renderCatHTML(cat, ci)).join('<hr class="cat-divider">')}
+      </div>
+    </div>
+
+    <!-- Includes (only for tiers with includes) -->
+    ${parseInt(curTier) >= 4 ? `
+    <div class="card">
+      <div class="card-head"><h3>Serviços inclusos no pacote</h3></div>
+      <div class="card-body">
+        <div class="includes-list" id="includesList">
+          ${t.includes.map((inc, ii) => `
+            <div class="include-row" data-ii="${ii}">
+              <input type="text" value="${esc(inc)}" oninput="setInclude(${ii},this.value)">
+              <button class="btn-x" onclick="removeInclude(${ii})">×</button>
+            </div>`).join('')}
+        </div>
+        <button class="btn-add-inc" onclick="addInclude()">+ Adicionar serviço</button>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+function renderCatHTML(cat, ci) {
+  return `
+    <div class="cat-block" data-ci="${ci}">
+      <div class="cat-top">
+        <input class="cat-label-in" type="text" value="${esc(cat.label)}"
+          oninput="setCatField(${ci},'label',this.value)" placeholder="Nome da categoria">
+        <div class="cat-num-wrap">
+          Escolha
+          <input class="cat-num-in" type="number" min="1" max="20" value="${cat.num}"
+            oninput="setCatField(${ci},'num',this.value)">
+          opção(ões)
+        </div>
+      </div>
+      <div class="items-list" id="itemsList-${ci}">
+        ${cat.items.map((item, ii) => renderItemHTML(item, ii, ci)).join('')}
+      </div>
+      <button class="btn-add-item" onclick="addItem(${ci})">+ Adicionar prato</button>
+    </div>`;
+}
+
+function renderItemHTML(item, ii, ci) {
+  const tags = item.tags || [];
+  return `
+    <div class="item-row" data-ci="${ci}" data-ii="${ii}">
+      <input class="item-name-in" type="text" value="${esc(item.name)}"
+        placeholder="Nome do prato" oninput="setItemName(${ci},${ii},this.value)">
+      <div class="tag-grp">
+        <button class="tag-btn glu${tags.includes('glu')?' on':''}"
+          onclick="toggleTag(${ci},${ii},'glu')" title="Sem Glúten">SG</button>
+        <button class="tag-btn lac${tags.includes('lac')?' on':''}"
+          onclick="toggleTag(${ci},${ii},'lac')" title="Sem Lactose">SL</button>
+        <button class="tag-btn veg${tags.includes('veg')?' on':''}"
+          onclick="toggleTag(${ci},${ii},'veg')" title="Vegano">VEG</button>
+      </div>
+      <button class="btn-x" onclick="removeItem(${ci},${ii})" title="Remover">×</button>
+    </div>`;
+}
+
+/* ── Mutations ── */
+function setField(key, val) {
+  DATA.tiers[curTier][key] = val;
+  if (key === 'name') {
+    const sb = sidebar.querySelector(`.sb-btn[data-tier="${curTier}"] .sb-name`);
+    if (sb) sb.textContent = val;
+    const title = mainContent.querySelector('.main-title');
+    if (title) title.childNodes[0].textContent = `Menu ${curTier.padStart(2,'0')} · ${val}\n`;
+  }
+}
+
+function setPrice(key, val) { DATA.tiers[curTier].price[key] = val; }
+function setCatField(ci, key, val) { DATA.tiers[curTier].features[ci][key] = val; }
+function setItemName(ci, ii, val) { DATA.tiers[curTier].features[ci].items[ii].name = val; }
+function setInclude(ii, val) { DATA.tiers[curTier].includes[ii] = val; }
+
+function toggleTag(ci, ii, tag) {
+  const tags = DATA.tiers[curTier].features[ci].items[ii].tags;
+  const idx = tags.indexOf(tag);
+  if (idx === -1) tags.push(tag); else tags.splice(idx, 1);
+  const row = document.querySelector(`.item-row[data-ci="${ci}"][data-ii="${ii}"] .tag-grp`);
+  if (row) row.innerHTML = `
+    <button class="tag-btn glu${tags.includes('glu')?' on':''}" onclick="toggleTag(${ci},${ii},'glu')" title="Sem Glúten">SG</button>
+    <button class="tag-btn lac${tags.includes('lac')?' on':''}" onclick="toggleTag(${ci},${ii},'lac')" title="Sem Lactose">SL</button>
+    <button class="tag-btn veg${tags.includes('veg')?' on':''}" onclick="toggleTag(${ci},${ii},'veg')" title="Vegano">VEG</button>`;
+}
+
+function addItem(ci) {
+  DATA.tiers[curTier].features[ci].items.push({name: '', tags: []});
+  const ii = DATA.tiers[curTier].features[ci].items.length - 1;
+  const list = document.getElementById(`itemsList-${ci}`);
+  const div = document.createElement('div');
+  div.innerHTML = renderItemHTML({name:'',tags:[]}, ii, ci).trim();
+  list.appendChild(div.firstElementChild);
+  list.lastElementChild.querySelector('.item-name-in').focus();
+}
+
+function removeItem(ci, ii) {
+  DATA.tiers[curTier].features[ci].items.splice(ii, 1);
+  renderMain();
+}
+
+function addInclude() {
+  DATA.tiers[curTier].includes.push('');
+  renderMain();
+  const rows = document.querySelectorAll('#includesList .include-row');
+  if (rows.length) rows[rows.length-1].querySelector('input').focus();
+}
+
+function removeInclude(ii) {
+  DATA.tiers[curTier].includes.splice(ii, 1);
+  renderMain();
+}
+
+/* ── Helper ── */
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
