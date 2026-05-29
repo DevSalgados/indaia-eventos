@@ -3,53 +3,165 @@
     "1": {
       "name": "Superior",
       "tagline": "O essencial servido com sofisticação Indaiá.",
-      "price": { "value": "149", "cents": "90" },
+      "price": {
+        "value": "550",
+        "cents": "90"
+      },
       "features": [
         {
           "num": "3",
           "label": "Pratos principais",
           "items": [
-            { "name": "Frango — Bechamel c/ Bacon", "tags": [] },
-            { "name": "Frango — Strogonoff", "tags": [] },
-            { "name": "Picanha Suína — Mostarda e Mel", "tags": ["glu", "lac"] },
-            { "name": "Picanha Suína — Barbecue c/ Cebola", "tags": ["glu", "lac"] },
-            { "name": "Filet — Strogonoff", "tags": [] }
+            {
+              "name": "Frango — Bechamel c/ Bacon",
+              "tags": []
+            },
+            {
+              "name": "Frango — Strogonoff",
+              "tags": []
+            },
+            {
+              "name": "Picanha Suína — Mostarda e Mel",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Picanha Suína — Barbecue c/ Cebola",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Filet — Strogonoff",
+              "tags": []
+            }
           ]
         },
         {
           "num": "1",
           "label": "Massa",
           "items": [
-            { "name": "Spaghetti ao molho Pomodoro c/ manjericão", "tags": ["veg"] },
-            { "name": "Spaghetti ao pesto de manjericão", "tags": ["veg"] },
-            { "name": "Penne ao molho suíço", "tags": ["veg"] },
-            { "name": "Penne na manteiga", "tags": [] }
+            {
+              "name": "Spaghetti ao molho Pomodoro c/ manjericão",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Spaghetti ao pesto de manjericão",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Penne ao molho suíço",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Penne na manteiga",
+              "tags": []
+            }
           ]
         },
         {
           "num": "3",
           "label": "Guarnições",
           "items": [
-            { "name": "Arroz branco na manteiga", "tags": ["glu", "lac"] },
-            { "name": "Batatas assadas c/ alecrim", "tags": ["glu", "veg"] },
-            { "name": "Batata palha", "tags": [] },
-            { "name": "Arroz à grega", "tags": ["glu", "lac"] },
-            { "name": "Arroz c/ brócolis e nozes", "tags": ["glu", "veg"] },
-            { "name": "Legumes ao vapor c/ tomilho", "tags": ["glu", "lac", "veg"] },
-            { "name": "Farofa de pão, bacon, castanhas e passas", "tags": [] },
-            { "name": "Purê de batata c/ ervas finas", "tags": [] }
+            {
+              "name": "Arroz branco na manteiga",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Batatas assadas c/ alecrim",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Batata palha",
+              "tags": []
+            },
+            {
+              "name": "Arroz à grega",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz c/ brócolis e nozes",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes ao vapor c/ tomilho",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Farofa de pão, bacon, castanhas e passas",
+              "tags": []
+            },
+            {
+              "name": "Purê de batata c/ ervas finas",
+              "tags": []
+            }
           ]
         },
         {
           "num": "4",
           "label": "Saladas",
           "items": [
-            { "name": "Salada de maçã", "tags": [] },
-            { "name": "Salpicão de frango", "tags": [] },
-            { "name": "Mix de folhas verdes", "tags": ["glu", "lac", "veg"] },
-            { "name": "Rúcula c/ tomate seco", "tags": ["glu", "lac", "veg"] },
-            { "name": "Mix de folhas c/ mostarda, mel e gorgonzola", "tags": ["glu"] },
-            { "name": "Folhas nobres c/ amêndoas, parmesão e balsâmico", "tags": ["glu"] }
+            {
+              "name": "Salada de maçã",
+              "tags": []
+            },
+            {
+              "name": "Salpicão de frango",
+              "tags": []
+            },
+            {
+              "name": "Mix de folhas verdes",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Rúcula c/ tomate seco",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Mix de folhas c/ mostarda, mel e gorgonzola",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Folhas nobres c/ amêndoas, parmesão e balsâmico",
+              "tags": [
+                "glu"
+              ]
+            }
           ]
         }
       ],
@@ -60,73 +172,236 @@
     "2": {
       "name": "Superior II",
       "tagline": "Variedade ampliada — entradas quentes e camarão à mesa.",
-      "price": { "value": "169", "cents": "90" },
+      "price": {
+        "value": "169",
+        "cents": "90"
+      },
       "features": [
         {
           "num": "2",
           "label": "Entrada",
           "items": [
-            { "name": "Escondidinho de Carne Seca", "tags": [] },
-            { "name": "Pães caseiros c/ patês (linguiça e truta)", "tags": [] },
-            { "name": "Mini Risoto de alecrim c/ cogumelos", "tags": ["glu"] },
-            { "name": "Batata Noissete ao molho tártaro", "tags": ["veg"] },
-            { "name": "Queijo de colono em cubos", "tags": ["glu"] },
-            { "name": "Mini Risoto Gorgonzola", "tags": ["glu"] }
+            {
+              "name": "Escondidinho de Carne Seca",
+              "tags": []
+            },
+            {
+              "name": "Pães caseiros c/ patês (linguiça e truta)",
+              "tags": []
+            },
+            {
+              "name": "Mini Risoto de alecrim c/ cogumelos",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Batata Noissete ao molho tártaro",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Queijo de colono em cubos",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Mini Risoto Gorgonzola",
+              "tags": [
+                "glu"
+              ]
+            }
           ]
         },
         {
           "num": "3",
           "label": "Pratos principais",
           "items": [
-            { "name": "Frango — Bechamel c/ Bacon", "tags": [] },
-            { "name": "Frango — Strogonoff", "tags": [] },
-            { "name": "Picanha Suína — Mostarda e Mel", "tags": ["glu", "lac"] },
-            { "name": "Picanha Suína — Barbecue c/ Cebola", "tags": ["glu", "lac"] },
-            { "name": "Camarão — Ao molho catupiry", "tags": [] },
-            { "name": "Camarão — Na Moranga", "tags": [] },
-            { "name": "Filet — Molho Mostarda", "tags": ["glu"] },
-            { "name": "Filet — Molho Madeira", "tags": [] }
+            {
+              "name": "Frango — Bechamel c/ Bacon",
+              "tags": []
+            },
+            {
+              "name": "Frango — Strogonoff",
+              "tags": []
+            },
+            {
+              "name": "Picanha Suína — Mostarda e Mel",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Picanha Suína — Barbecue c/ Cebola",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Camarão — Ao molho catupiry",
+              "tags": []
+            },
+            {
+              "name": "Camarão — Na Moranga",
+              "tags": []
+            },
+            {
+              "name": "Filet — Molho Mostarda",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Filet — Molho Madeira",
+              "tags": []
+            }
           ]
         },
         {
           "num": "2",
           "label": "Massas",
           "items": [
-            { "name": "Gnocchi ao molho Suíço", "tags": [] },
-            { "name": "Gnocchi ao molho de Champignons", "tags": [] },
-            { "name": "Spaghetti ao Frutos do Mar c/ Açafrão", "tags": ["lac"] },
-            { "name": "Spaghetti c/ Bacon e manjericão", "tags": [] },
-            { "name": "Penne ao molho de Camarões c/ limão", "tags": [] },
-            { "name": "Penne na Manteiga", "tags": [] }
+            {
+              "name": "Gnocchi ao molho Suíço",
+              "tags": []
+            },
+            {
+              "name": "Gnocchi ao molho de Champignons",
+              "tags": []
+            },
+            {
+              "name": "Spaghetti ao Frutos do Mar c/ Açafrão",
+              "tags": [
+                "lac"
+              ]
+            },
+            {
+              "name": "Spaghetti c/ Bacon e manjericão",
+              "tags": []
+            },
+            {
+              "name": "Penne ao molho de Camarões c/ limão",
+              "tags": []
+            },
+            {
+              "name": "Penne na Manteiga",
+              "tags": []
+            }
           ]
         },
         {
           "num": "4",
           "label": "Guarnições",
           "items": [
-            { "name": "Arroz branco na manteiga", "tags": ["glu", "lac"] },
-            { "name": "Batatas assadas c/ alecrim", "tags": ["glu", "veg"] },
-            { "name": "Batata palha", "tags": [] },
-            { "name": "Arroz à grega", "tags": ["glu", "lac"] },
-            { "name": "Arroz c/ brócolis e nozes", "tags": ["glu", "veg"] },
-            { "name": "Legumes ao vapor c/ tomilho", "tags": ["glu", "lac", "veg"] },
-            { "name": "Farofa de pão, bacon, castanhas e passas", "tags": [] },
-            { "name": "Purê de batata c/ ervas finas", "tags": [] },
-            { "name": "Purê de aipim c/ bacon", "tags": [] }
+            {
+              "name": "Arroz branco na manteiga",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Batatas assadas c/ alecrim",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Batata palha",
+              "tags": []
+            },
+            {
+              "name": "Arroz à grega",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz c/ brócolis e nozes",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes ao vapor c/ tomilho",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Farofa de pão, bacon, castanhas e passas",
+              "tags": []
+            },
+            {
+              "name": "Purê de batata c/ ervas finas",
+              "tags": []
+            },
+            {
+              "name": "Purê de aipim c/ bacon",
+              "tags": []
+            }
           ]
         },
         {
           "num": "5",
           "label": "Saladas",
           "items": [
-            { "name": "Salada de maçã", "tags": [] },
-            { "name": "Salpicão de frango", "tags": [] },
-            { "name": "Ovos de codorna", "tags": ["glu", "lac"] },
-            { "name": "Salada de folhas c/ camarões e tomate seco", "tags": ["glu", "lac", "veg"] },
-            { "name": "Mix de folhas c/ mostarda, mel e gorgonzola", "tags": ["glu"] },
-            { "name": "Folhas c/ palmito, frango, bacon e parmesão", "tags": [] },
-            { "name": "Tomate cereja c/ azeitona e champignon", "tags": ["glu", "lac", "veg"] },
-            { "name": "Folhas nobres c/ amêndoas, parmesão e balsâmico", "tags": ["glu"] }
+            {
+              "name": "Salada de maçã",
+              "tags": []
+            },
+            {
+              "name": "Salpicão de frango",
+              "tags": []
+            },
+            {
+              "name": "Ovos de codorna",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Salada de folhas c/ camarões e tomate seco",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Mix de folhas c/ mostarda, mel e gorgonzola",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Folhas c/ palmito, frango, bacon e parmesão",
+              "tags": []
+            },
+            {
+              "name": "Tomate cereja c/ azeitona e champignon",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Folhas nobres c/ amêndoas, parmesão e balsâmico",
+              "tags": [
+                "glu"
+              ]
+            }
           ]
         }
       ],
@@ -137,77 +412,256 @@
     "3": {
       "name": "Premium",
       "tagline": "Onde Burrata e Pupunha encontram a sua mesa.",
-      "price": { "value": "179", "cents": "90" },
+      "price": {
+        "value": "179",
+        "cents": "90"
+      },
       "features": [
         {
           "num": "3",
           "label": "Entrada",
           "items": [
-            { "name": "Bolinho de peixe", "tags": [] },
-            { "name": "Pães caseiros c/ patês (linguiça e truta)", "tags": [] },
-            { "name": "Mini risoto de alecrim c/ cogumelos", "tags": ["glu"] },
-            { "name": "Batata Noissete ao molho tártaro", "tags": ["veg"] },
-            { "name": "Escondidinho de Filet", "tags": [] },
-            { "name": "Mini risoto de alho poró", "tags": ["glu"] }
+            {
+              "name": "Bolinho de peixe",
+              "tags": []
+            },
+            {
+              "name": "Pães caseiros c/ patês (linguiça e truta)",
+              "tags": []
+            },
+            {
+              "name": "Mini risoto de alecrim c/ cogumelos",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Batata Noissete ao molho tártaro",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Escondidinho de Filet",
+              "tags": []
+            },
+            {
+              "name": "Mini risoto de alho poró",
+              "tags": [
+                "glu"
+              ]
+            }
           ]
         },
         {
           "num": "4",
           "label": "Pratos principais",
           "items": [
-            { "name": "Frango — Bechamel c/ Bacon", "tags": [] },
-            { "name": "Frango — Strogonoff", "tags": [] },
-            { "name": "Picanha Suína — Mostarda e Mel", "tags": ["glu", "lac"] },
-            { "name": "Picanha Suína — Barbecue c/ Cebola", "tags": ["glu", "lac"] },
-            { "name": "Camarão — Ao molho catupiry", "tags": [] },
-            { "name": "Camarões ao creme de moranga, dendê e crocante de alho poró", "tags": [] },
-            { "name": "Filet — Ao molho mostarda", "tags": ["glu"] },
-            { "name": "Filet — Ao molho madeira", "tags": [] }
+            {
+              "name": "Frango — Bechamel c/ Bacon",
+              "tags": []
+            },
+            {
+              "name": "Frango — Strogonoff",
+              "tags": []
+            },
+            {
+              "name": "Picanha Suína — Mostarda e Mel",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Picanha Suína — Barbecue c/ Cebola",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Camarão — Ao molho catupiry",
+              "tags": []
+            },
+            {
+              "name": "Camarões ao creme de moranga, dendê e crocante de alho poró",
+              "tags": []
+            },
+            {
+              "name": "Filet — Ao molho mostarda",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Filet — Ao molho madeira",
+              "tags": []
+            }
           ]
         },
         {
           "num": "2",
           "label": "Massas",
           "items": [
-            { "name": "Gnocchi ao molho suíço", "tags": [] },
-            { "name": "Gnocchi ao molho de champignons", "tags": [] },
-            { "name": "Spaghetti ao frutos do mar c/ açafrão", "tags": ["lac"] },
-            { "name": "Spaghetti c/ bacon e manjericão", "tags": [] },
-            { "name": "Penne ao molho de camarão c/ limão", "tags": [] },
-            { "name": "Penne na manteiga", "tags": [] },
-            { "name": "Caneloni de frango c/ catupiry", "tags": [] },
-            { "name": "Caneloni de Camarão c/ catupiry", "tags": [] }
+            {
+              "name": "Gnocchi ao molho suíço",
+              "tags": []
+            },
+            {
+              "name": "Gnocchi ao molho de champignons",
+              "tags": []
+            },
+            {
+              "name": "Spaghetti ao frutos do mar c/ açafrão",
+              "tags": [
+                "lac"
+              ]
+            },
+            {
+              "name": "Spaghetti c/ bacon e manjericão",
+              "tags": []
+            },
+            {
+              "name": "Penne ao molho de camarão c/ limão",
+              "tags": []
+            },
+            {
+              "name": "Penne na manteiga",
+              "tags": []
+            },
+            {
+              "name": "Caneloni de frango c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Caneloni de Camarão c/ catupiry",
+              "tags": []
+            }
           ]
         },
         {
           "num": "5",
           "label": "Guarnições",
           "items": [
-            { "name": "Paella de frutos do mar", "tags": ["glu", "lac"] },
-            { "name": "Arroz branco na manteiga", "tags": ["glu", "lac"] },
-            { "name": "Batatas assadas c/ alecrim", "tags": ["glu", "veg"] },
-            { "name": "Batata palha", "tags": [] },
-            { "name": "Arroz à grega", "tags": ["glu", "lac"] },
-            { "name": "Arroz c/ brócolis e nozes", "tags": ["glu", "veg"] },
-            { "name": "Legumes ao vapor c/ tomilho", "tags": ["glu", "lac", "veg"] },
-            { "name": "Farofa de pão, bacon, castanhas e passas", "tags": [] },
-            { "name": "Purê de batata c/ ervas finas", "tags": [] },
-            { "name": "Purê de aipim c/ bacon", "tags": [] }
+            {
+              "name": "Paella de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz branco na manteiga",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Batatas assadas c/ alecrim",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Batata palha",
+              "tags": []
+            },
+            {
+              "name": "Arroz à grega",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz c/ brócolis e nozes",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes ao vapor c/ tomilho",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Farofa de pão, bacon, castanhas e passas",
+              "tags": []
+            },
+            {
+              "name": "Purê de batata c/ ervas finas",
+              "tags": []
+            },
+            {
+              "name": "Purê de aipim c/ bacon",
+              "tags": []
+            }
           ]
         },
         {
           "num": "5",
           "label": "Saladas",
           "items": [
-            { "name": "Pupunha laminada c/ camarões e vinagrete de frutas amarelas", "tags": ["glu", "lac"] },
-            { "name": "Burrata artesanal c/ folhas baby, parma e tomates ao pesto", "tags": ["glu"] },
-            { "name": "Salada de maçã", "tags": [] },
-            { "name": "Salpicão de frango", "tags": [] },
-            { "name": "Ovos de codorna", "tags": ["glu", "lac"] },
-            { "name": "Salada de folhas c/ camarões e tomate seco", "tags": ["glu", "lac", "veg"] },
-            { "name": "Mix de folhas c/ mostarda, mel e gorgonzola", "tags": ["glu"] },
-            { "name": "Folhas c/ palmito, frango, bacon e parmesão", "tags": [] },
-            { "name": "Tomate cereja c/ azeitona e champignon", "tags": ["glu", "lac", "veg"] }
+            {
+              "name": "Pupunha laminada c/ camarões e vinagrete de frutas amarelas",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Burrata artesanal c/ folhas baby, parma e tomates ao pesto",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salada de maçã",
+              "tags": []
+            },
+            {
+              "name": "Salpicão de frango",
+              "tags": []
+            },
+            {
+              "name": "Ovos de codorna",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Salada de folhas c/ camarões e tomate seco",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Mix de folhas c/ mostarda, mel e gorgonzola",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Folhas c/ palmito, frango, bacon e parmesão",
+              "tags": []
+            },
+            {
+              "name": "Tomate cereja c/ azeitona e champignon",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            }
           ]
         }
       ],
@@ -218,188 +672,675 @@
     "4": {
       "name": "Privilege",
       "tagline": "Carré de Cordeiro, Salmão e Lanche da Madrugada inclusos.",
-      "price": { "value": "249", "cents": "90" },
+      "price": {
+        "value": "249",
+        "cents": "90"
+      },
       "badge": "Mais escolhido",
       "features": [
         {
           "num": "4",
           "label": "Entrada",
           "items": [
-            { "name": "Bolinho de peixe", "tags": [] },
-            { "name": "Pães caseiros c/ patês (linguiça e truta)", "tags": [] },
-            { "name": "Mini risoto de salmão", "tags": ["glu"] },
-            { "name": "Escondidinho de camarão c/ catupiry", "tags": [] },
-            { "name": "Mini paella de frutos do mar", "tags": ["glu", "lac"] },
-            { "name": "Batata Noissete ao molho tártaro", "tags": ["veg"] },
-            { "name": "Queijo de colono em cubos", "tags": ["glu"] },
-            { "name": "Mini caldeirada de frutos do mar", "tags": ["glu", "lac"] }
+            {
+              "name": "Bolinho de peixe",
+              "tags": []
+            },
+            {
+              "name": "Pães caseiros c/ patês (linguiça e truta)",
+              "tags": []
+            },
+            {
+              "name": "Mini risoto de salmão",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Escondidinho de camarão c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Mini paella de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Batata Noissete ao molho tártaro",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Queijo de colono em cubos",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Mini caldeirada de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            }
           ]
         },
         {
           "num": "4",
           "label": "Pratos principais",
           "items": [
-            { "name": "Frango — Bechamel c/ Bacon", "tags": [] },
-            { "name": "Frango — Strogonoff", "tags": [] },
-            { "name": "Picanha Suína — Mostarda e Mel", "tags": ["glu", "lac"] },
-            { "name": "Picanha Suína — Barbecue c/ Cebola", "tags": ["glu", "lac"] },
-            { "name": "Salmão — A Belle Meunière", "tags": ["glu"] },
-            { "name": "Salmão — Molho de camarão", "tags": [] },
-            { "name": "Filet — Ao molho mostarda", "tags": ["glu"] },
-            { "name": "Filet — Ao molho madeira", "tags": [] },
-            { "name": "Camarão — Ao molho catupiry", "tags": [] },
-            { "name": "Camarões ao creme de moranga, dendê e alho poró", "tags": [] },
-            { "name": "Carré de Cordeiro — Vinho e ervas", "tags": ["glu"] },
-            { "name": "Carré de Cordeiro — Manteiga e alho", "tags": ["glu"] }
+            {
+              "name": "Frango — Bechamel c/ Bacon",
+              "tags": []
+            },
+            {
+              "name": "Frango — Strogonoff",
+              "tags": []
+            },
+            {
+              "name": "Picanha Suína — Mostarda e Mel",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Picanha Suína — Barbecue c/ Cebola",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Salmão — A Belle Meunière",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salmão — Molho de camarão",
+              "tags": []
+            },
+            {
+              "name": "Filet — Ao molho mostarda",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Filet — Ao molho madeira",
+              "tags": []
+            },
+            {
+              "name": "Camarão — Ao molho catupiry",
+              "tags": []
+            },
+            {
+              "name": "Camarões ao creme de moranga, dendê e alho poró",
+              "tags": []
+            },
+            {
+              "name": "Carré de Cordeiro — Vinho e ervas",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Carré de Cordeiro — Manteiga e alho",
+              "tags": [
+                "glu"
+              ]
+            }
           ]
         },
         {
           "num": "2",
           "label": "Massas",
           "items": [
-            { "name": "Gnocchi ao molho suíço", "tags": [] },
-            { "name": "Gnocchi ao molho de champignons", "tags": [] },
-            { "name": "Caneloni de frango c/ catupiry", "tags": [] },
-            { "name": "Caneloni de camarão c/ catupiry", "tags": [] },
-            { "name": "Penne ao molho de camarão c/ limão", "tags": [] },
-            { "name": "Penne na manteiga", "tags": [] },
-            { "name": "Spaghetti ao frutos do mar c/ açafrão", "tags": ["lac"] },
-            { "name": "Spaghetti c/ bacon e manjericão", "tags": [] }
+            {
+              "name": "Gnocchi ao molho suíço",
+              "tags": []
+            },
+            {
+              "name": "Gnocchi ao molho de champignons",
+              "tags": []
+            },
+            {
+              "name": "Caneloni de frango c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Caneloni de camarão c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Penne ao molho de camarão c/ limão",
+              "tags": []
+            },
+            {
+              "name": "Penne na manteiga",
+              "tags": []
+            },
+            {
+              "name": "Spaghetti ao frutos do mar c/ açafrão",
+              "tags": [
+                "lac"
+              ]
+            },
+            {
+              "name": "Spaghetti c/ bacon e manjericão",
+              "tags": []
+            }
           ]
         },
         {
           "num": "5",
           "label": "Guarnições",
           "items": [
-            { "name": "Paella de frutos do mar", "tags": ["glu", "lac"] },
-            { "name": "Arroz branco na manteiga", "tags": ["glu", "lac"] },
-            { "name": "Purê de aipim c/ bacon", "tags": [] },
-            { "name": "Batata palha", "tags": [] },
-            { "name": "Arroz à grega", "tags": ["glu", "lac"] },
-            { "name": "Arroz c/ brócolis e nozes", "tags": ["glu", "veg"] },
-            { "name": "Farofa de camarão / Arroz c/ nozes", "tags": [] },
-            { "name": "Farofa de pão, bacon, castanhas e passas", "tags": [] },
-            { "name": "Purê de batata c/ ervas finas", "tags": [] },
-            { "name": "Batatas assadas c/ alecrim", "tags": ["glu", "veg"] },
-            { "name": "Legumes ao vapor c/ tomilho", "tags": ["glu", "lac", "veg"] },
-            { "name": "Legumes salteados c/ bacon e tomilho", "tags": ["glu", "lac"] },
-            { "name": "Coração de palmito in natura ao vapor", "tags": ["glu", "lac", "veg"] }
+            {
+              "name": "Paella de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz branco na manteiga",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Purê de aipim c/ bacon",
+              "tags": []
+            },
+            {
+              "name": "Batata palha",
+              "tags": []
+            },
+            {
+              "name": "Arroz à grega",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz c/ brócolis e nozes",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Farofa de camarão / Arroz c/ nozes",
+              "tags": []
+            },
+            {
+              "name": "Farofa de pão, bacon, castanhas e passas",
+              "tags": []
+            },
+            {
+              "name": "Purê de batata c/ ervas finas",
+              "tags": []
+            },
+            {
+              "name": "Batatas assadas c/ alecrim",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes ao vapor c/ tomilho",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes salteados c/ bacon e tomilho",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Coração de palmito in natura ao vapor",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            }
           ]
         },
         {
           "num": "6",
           "label": "Saladas",
           "items": [
-            { "name": "Pupunha laminada c/ camarões e vinagrete de frutas amarelas", "tags": ["glu", "lac"] },
-            { "name": "Burrata artesanal c/ folhas baby, parma e tomates ao pesto", "tags": ["glu"] },
-            { "name": "Salada de folhas c/ camarões e tomate seco", "tags": ["glu", "lac", "veg"] },
-            { "name": "Mix de folhas c/ mostarda, mel e gorgonzola", "tags": ["glu"] },
-            { "name": "Folhas c/ palmito, frango, bacon e parmesão", "tags": [] },
-            { "name": "Tomate cereja c/ azeitona e champignon", "tags": ["glu", "lac", "veg"] },
-            { "name": "Folhas c/ peras, gorgonzola e nozes", "tags": ["glu"] },
-            { "name": "Carpaccio de Filet c/ rúcula e alcaparras", "tags": ["glu"] },
-            { "name": "Salada de maçã", "tags": [] },
-            { "name": "Salpicão de frango", "tags": [] },
-            { "name": "Ovos de codorna", "tags": ["glu", "lac"] },
-            { "name": "Salada de frutos do mar", "tags": ["glu", "lac"] }
+            {
+              "name": "Pupunha laminada c/ camarões e vinagrete de frutas amarelas",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Burrata artesanal c/ folhas baby, parma e tomates ao pesto",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salada de folhas c/ camarões e tomate seco",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Mix de folhas c/ mostarda, mel e gorgonzola",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Folhas c/ palmito, frango, bacon e parmesão",
+              "tags": []
+            },
+            {
+              "name": "Tomate cereja c/ azeitona e champignon",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Folhas c/ peras, gorgonzola e nozes",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Carpaccio de Filet c/ rúcula e alcaparras",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salada de maçã",
+              "tags": []
+            },
+            {
+              "name": "Salpicão de frango",
+              "tags": []
+            },
+            {
+              "name": "Ovos de codorna",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Salada de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            }
           ]
         }
       ],
-      "includes": ["Lanche da Madrugada — Tipo III"],
+      "includes": [
+        "Lanche da Madrugada — Tipo III"
+      ],
       "motivation": "O nível mais escolhido pelos noivos. Cardápio executivo com Lanche da Madrugada já incluso.",
       "progress": 80
     },
     "5": {
       "name": "Excellence",
       "tagline": "A experiência Indaiá em sua forma máxima.",
-      "price": { "value": "279", "cents": "90" },
+      "price": {
+        "value": "279",
+        "cents": "90"
+      },
       "badge": "Experiência completa",
       "features": [
         {
           "num": "4",
           "label": "Entrada",
           "items": [
-            { "name": "Bolinho de peixe", "tags": [] },
-            { "name": "Pães caseiros c/ patês (linguiça e truta)", "tags": [] },
-            { "name": "Mini risoto de salmão", "tags": ["glu"] },
-            { "name": "Escondidinho de camarão c/ catupiry", "tags": [] },
-            { "name": "Mini paella de frutos do mar", "tags": ["glu", "lac"] },
-            { "name": "Batata Noissete ao molho tártaro", "tags": ["veg"] },
-            { "name": "Queijo de colono em cubos", "tags": ["glu"] },
-            { "name": "Mini caldeirada de frutos do mar", "tags": ["glu", "lac"] }
+            {
+              "name": "Bolinho de peixe",
+              "tags": []
+            },
+            {
+              "name": "Pães caseiros c/ patês (linguiça e truta)",
+              "tags": []
+            },
+            {
+              "name": "Mini risoto de salmão",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Escondidinho de camarão c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Mini paella de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Batata Noissete ao molho tártaro",
+              "tags": [
+                "veg"
+              ]
+            },
+            {
+              "name": "Queijo de colono em cubos",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Mini caldeirada de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            }
           ]
         },
         {
           "num": "4",
           "label": "Pratos principais",
           "items": [
-            { "name": "Frango — Bechamel c/ Bacon", "tags": [] },
-            { "name": "Frango — Strogonoff", "tags": [] },
-            { "name": "Picanha Suína — Mostarda e Mel", "tags": ["glu", "lac"] },
-            { "name": "Picanha Suína — Barbecue c/ Cebola", "tags": ["glu", "lac"] },
-            { "name": "Salmão — A Belle Meunière", "tags": ["glu"] },
-            { "name": "Salmão — Molho de camarão", "tags": [] },
-            { "name": "Filet — Ao molho mostarda", "tags": ["glu"] },
-            { "name": "Filet — Ao molho madeira", "tags": [] },
-            { "name": "Camarão — Ao molho catupiry", "tags": [] },
-            { "name": "Camarões ao creme de moranga, dendê e alho poró", "tags": [] },
-            { "name": "Carré de Cordeiro — Vinho e ervas", "tags": ["glu"] },
-            { "name": "Carré de Cordeiro — Manteiga e alho", "tags": ["glu"] }
+            {
+              "name": "Frango — Bechamel c/ Bacon",
+              "tags": []
+            },
+            {
+              "name": "Frango — Strogonoff",
+              "tags": []
+            },
+            {
+              "name": "Picanha Suína — Mostarda e Mel",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Picanha Suína — Barbecue c/ Cebola",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Salmão — A Belle Meunière",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salmão — Molho de camarão",
+              "tags": []
+            },
+            {
+              "name": "Filet — Ao molho mostarda",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Filet — Ao molho madeira",
+              "tags": []
+            },
+            {
+              "name": "Camarão — Ao molho catupiry",
+              "tags": []
+            },
+            {
+              "name": "Camarões ao creme de moranga, dendê e alho poró",
+              "tags": []
+            },
+            {
+              "name": "Carré de Cordeiro — Vinho e ervas",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Carré de Cordeiro — Manteiga e alho",
+              "tags": [
+                "glu"
+              ]
+            }
           ]
         },
         {
           "num": "2",
           "label": "Massas",
           "items": [
-            { "name": "Gnocchi ao molho suíço", "tags": [] },
-            { "name": "Gnocchi ao molho de champignons", "tags": [] },
-            { "name": "Caneloni de frango c/ catupiry", "tags": [] },
-            { "name": "Caneloni de camarão c/ catupiry", "tags": [] },
-            { "name": "Penne ao molho de camarão c/ limão", "tags": [] },
-            { "name": "Penne na manteiga", "tags": [] },
-            { "name": "Spaghetti ao frutos do mar c/ açafrão", "tags": ["lac"] },
-            { "name": "Spaghetti c/ bacon e manjericão", "tags": [] }
+            {
+              "name": "Gnocchi ao molho suíço",
+              "tags": []
+            },
+            {
+              "name": "Gnocchi ao molho de champignons",
+              "tags": []
+            },
+            {
+              "name": "Caneloni de frango c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Caneloni de camarão c/ catupiry",
+              "tags": []
+            },
+            {
+              "name": "Penne ao molho de camarão c/ limão",
+              "tags": []
+            },
+            {
+              "name": "Penne na manteiga",
+              "tags": []
+            },
+            {
+              "name": "Spaghetti ao frutos do mar c/ açafrão",
+              "tags": [
+                "lac"
+              ]
+            },
+            {
+              "name": "Spaghetti c/ bacon e manjericão",
+              "tags": []
+            }
           ]
         },
         {
           "num": "5",
           "label": "Guarnições",
           "items": [
-            { "name": "Paella de frutos do mar", "tags": ["glu", "lac"] },
-            { "name": "Arroz branco na manteiga", "tags": ["glu", "lac"] },
-            { "name": "Purê de aipim c/ bacon", "tags": [] },
-            { "name": "Batata palha", "tags": [] },
-            { "name": "Arroz à grega", "tags": ["glu", "lac"] },
-            { "name": "Arroz c/ brócolis e nozes", "tags": ["glu", "veg"] },
-            { "name": "Farofa de camarão / Arroz c/ nozes", "tags": [] },
-            { "name": "Farofa de pão, bacon, castanhas e passas", "tags": [] },
-            { "name": "Purê de batata c/ ervas finas", "tags": [] },
-            { "name": "Batatas assadas c/ alecrim", "tags": ["glu", "veg"] },
-            { "name": "Legumes ao vapor c/ tomilho", "tags": ["glu", "lac", "veg"] },
-            { "name": "Legumes salteados c/ bacon e tomilho", "tags": ["glu", "lac"] },
-            { "name": "Coração de palmito in natura ao vapor", "tags": ["glu", "lac", "veg"] }
+            {
+              "name": "Paella de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz branco na manteiga",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Purê de aipim c/ bacon",
+              "tags": []
+            },
+            {
+              "name": "Batata palha",
+              "tags": []
+            },
+            {
+              "name": "Arroz à grega",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Arroz c/ brócolis e nozes",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Farofa de camarão / Arroz c/ nozes",
+              "tags": []
+            },
+            {
+              "name": "Farofa de pão, bacon, castanhas e passas",
+              "tags": []
+            },
+            {
+              "name": "Purê de batata c/ ervas finas",
+              "tags": []
+            },
+            {
+              "name": "Batatas assadas c/ alecrim",
+              "tags": [
+                "glu",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes ao vapor c/ tomilho",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Legumes salteados c/ bacon e tomilho",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Coração de palmito in natura ao vapor",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            }
           ]
         },
         {
           "num": "6",
           "label": "Saladas",
           "items": [
-            { "name": "Pupunha laminada c/ camarões e vinagrete de frutas amarelas", "tags": ["glu", "lac"] },
-            { "name": "Burrata artesanal c/ folhas baby, parma e tomates ao pesto", "tags": ["glu"] },
-            { "name": "Salada de folhas c/ camarões e tomate seco", "tags": ["glu", "lac", "veg"] },
-            { "name": "Mix de folhas c/ mostarda, mel e gorgonzola", "tags": ["glu"] },
-            { "name": "Folhas c/ palmito, frango, bacon e parmesão", "tags": [] },
-            { "name": "Tomate cereja c/ azeitona e champignon", "tags": ["glu", "lac", "veg"] },
-            { "name": "Folhas c/ peras, gorgonzola e nozes", "tags": ["glu"] },
-            { "name": "Carpaccio de Filet c/ rúcula e alcaparras", "tags": ["glu"] },
-            { "name": "Salada de maçã", "tags": [] },
-            { "name": "Salpicão de frango", "tags": [] },
-            { "name": "Ovos de codorna", "tags": ["glu", "lac"] },
-            { "name": "Salada de frutos do mar", "tags": ["glu", "lac"] }
+            {
+              "name": "Pupunha laminada c/ camarões e vinagrete de frutas amarelas",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Burrata artesanal c/ folhas baby, parma e tomates ao pesto",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salada de folhas c/ camarões e tomate seco",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Mix de folhas c/ mostarda, mel e gorgonzola",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Folhas c/ palmito, frango, bacon e parmesão",
+              "tags": []
+            },
+            {
+              "name": "Tomate cereja c/ azeitona e champignon",
+              "tags": [
+                "glu",
+                "lac",
+                "veg"
+              ]
+            },
+            {
+              "name": "Folhas c/ peras, gorgonzola e nozes",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Carpaccio de Filet c/ rúcula e alcaparras",
+              "tags": [
+                "glu"
+              ]
+            },
+            {
+              "name": "Salada de maçã",
+              "tags": []
+            },
+            {
+              "name": "Salpicão de frango",
+              "tags": []
+            },
+            {
+              "name": "Ovos de codorna",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            },
+            {
+              "name": "Salada de frutos do mar",
+              "tags": [
+                "glu",
+                "lac"
+              ]
+            }
           ]
         }
       ],
-      "includes": ["Lanche da Madrugada — Tipo III", "Mesa Mediterrânea"],
+      "includes": [
+        "Lanche da Madrugada — Tipo III",
+        "Mesa Mediterrânea"
+      ],
       "motivation": "A Mesa Mediterrânea recebe seus convidados. Você cuida do brinde — o resto fica conosco.",
       "progress": 100
     }
