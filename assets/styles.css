@@ -1237,6 +1237,23 @@ em, .italic {
   transition: color 0.2s var(--easing);
 }
 .footer-cols a:hover { color: var(--olive-light); }
+.footer-cols a.footer-whats {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  color: var(--olive-light);
+  transition: background 0.2s var(--easing), color 0.2s var(--easing), border-color 0.2s var(--easing);
+}
+.footer-cols a.footer-whats:hover {
+  background: var(--olive-light);
+  border-color: var(--olive-light);
+  color: var(--ink);
+}
 
 .footer-bottom {
   display: flex;

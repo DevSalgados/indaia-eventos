@@ -92,6 +92,9 @@ function renderTier(tier) {
   const data = TIERS[tier];
   if (!data) return '';
 
+  const waMessage = encodeURIComponent(`Olá, estou olhando o Menu ${tier.toString().padStart(2, '0')} · ${data.name} e quero fazer uma cotação.`);
+  const waLink = `https://wa.me/5547992007914?text=${waMessage}`;
+
   const includesBlock = data.includes.length
     ? `
       <div class="tier-includes">
@@ -145,7 +148,7 @@ function renderTier(tier) {
 
     <div class="tier-cta">
       <p class="tier-motivation">${data.motivation}</p>
-      <a href="#contato" class="btn btn-primary" data-tier-cta>
+      <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-primary" data-tier-cta>
         <span>Quero este menu</span>
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
