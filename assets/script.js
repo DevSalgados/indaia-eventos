@@ -50,7 +50,7 @@ const TIERS = {
   },
   4: {
     name: 'Privilege',
-    tagline: 'Carré de Cordeiro, Salmão e decoração assinada inclusos.',
+    tagline: 'Carré de Cordeiro, Salmão e Lanche da Madrugada inclusos.',
     price: { value: '249', cents: '90' },
     features: [
       { num: '4', label: 'Entradas', desc: 'Mini paella de frutos do mar, mini caldeirada, escondidinho de camarão.' },
@@ -60,10 +60,9 @@ const TIERS = {
       { num: '6', label: 'Saladas', desc: 'Carpaccio de Filet com rúcula, folhas com peras, gorgonzola e nozes.' },
     ],
     includes: [
-      'Elegance Decor',
       'Lanche da Madrugada — Tipo III',
     ],
-    motivation: 'O nível mais escolhido pelos noivos. Cardápio executivo + decoração assinada já inclusos.',
+    motivation: 'O nível mais escolhido pelos noivos. Cardápio executivo com Lanche da Madrugada já incluso.',
     progress: 80,
     badge: 'Mais escolhido',
   },
@@ -79,7 +78,6 @@ const TIERS = {
       { num: '6', label: 'Saladas', desc: 'Burrata artesanal, Carpaccio, frutos do mar, peras com gorgonzola.' },
     ],
     includes: [
-      'Elegance Decor',
       'Lanche da Madrugada — Tipo III',
       'Mesa Mediterrânea',
     ],
@@ -99,7 +97,16 @@ function renderTier(tier) {
       <div class="tier-includes">
         <div class="tier-includes-head">Serviços inclusos</div>
         <ul class="tier-includes-list">
-          ${data.includes.map(i => `<li>${i}</li>`).join('')}
+          ${data.includes.map(i => {
+            const lower = i.toLowerCase();
+            if (lower.includes('lanche da madrugada')) {
+              return `<li data-modal-trigger="lanche" role="button" tabindex="0">${i}</li>`;
+            }
+            if (lower.includes('mesa mediterr')) {
+              return `<li data-modal-trigger="mesa" role="button" tabindex="0">${i}</li>`;
+            }
+            return `<li>${i}</li>`;
+          }).join('')}
         </ul>
       </div>`
     : '';
@@ -218,4 +225,61 @@ document.addEventListener('click', (e) => {
   if (!target) return;
   e.preventDefault();
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* =========================================================
+   MODALS — Lanche da Madrugada e Mesa Mediterrânea
+   ========================================================= */
+const MODAL_MAP = {
+  lanche: document.getElementById('modalLanche'),
+  mesa:   document.getElementById('modalMesa'),
+};
+
+function openModalByKey(key) {
+  const m = MODAL_MAP[key];
+  if (!m) return;
+  m.classList.add('is-open');
+  m.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  const closeBtn = m.querySelector('.modal-lanche-close');
+  if (closeBtn) setTimeout(() => closeBtn.focus(), 200);
+}
+
+function closeAllModals() {
+  Object.values(MODAL_MAP).forEach(m => {
+    if (!m) return;
+    m.classList.remove('is-open');
+    m.setAttribute('aria-hidden', 'true');
+  });
+  document.body.classList.remove('modal-open');
+}
+
+function anyModalOpen() {
+  return Object.values(MODAL_MAP).some(m => m && m.classList.contains('is-open'));
+}
+
+// Triggers e closers via delegação
+document.addEventListener('click', (e) => {
+  const trigger = e.target.closest('[data-modal-trigger]');
+  if (trigger) {
+    e.preventDefault();
+    openModalByKey(trigger.dataset.modalTrigger);
+    return;
+  }
+  const closer = e.target.closest('[data-modal-close]');
+  if (closer && anyModalOpen()) {
+    closeAllModals();
+  }
+});
+
+// Teclado: Enter/Espaço no trigger, ESC pra fechar
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && anyModalOpen()) {
+    closeAllModals();
+    return;
+  }
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-modal-trigger]')) {
+    e.preventDefault();
+    openModalByKey(e.target.dataset.modalTrigger);
+  }
 });
