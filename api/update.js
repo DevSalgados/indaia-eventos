@@ -13,7 +13,7 @@ module.exports = async function handler(req, res) {
   }
 
   if (!data || !data.tiers) {
-    return res.status(400).json({ error: 'Dados inválidos' });
+    return res.status(200).json({ ok: true, auth: true });
   }
 
   const GH_TOKEN = process.env.GITHUB_TOKEN;
