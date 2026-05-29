@@ -505,34 +505,86 @@ function anyModalOpen() {
   return Object.values(MODAL_MAP).some(m => m && m.classList.contains('is-open'));
 }
 
-// Triggers e closers via delegação
+/* =========================================================
+   PHOTO POPUP — foto do produto sobre os modais
+   ========================================================= */
+const photoPopup = document.getElementById('photoPopup');
+const photoPopupImg = document.getElementById('photoPopupImg');
+const photoPopupCaption = document.getElementById('photoPopupCaption');
+
+function openPhotoPopup(src, caption) {
+  if (!photoPopup || !photoPopupImg) return;
+  photoPopupImg.src = src;
+  photoPopupImg.alt = caption || '';
+  if (photoPopupCaption) photoPopupCaption.textContent = caption || '';
+  photoPopup.classList.add('is-open');
+  photoPopup.setAttribute('aria-hidden', 'false');
+}
+
+function closePhotoPopup() {
+  if (!photoPopup) return;
+  photoPopup.classList.remove('is-open');
+  photoPopup.setAttribute('aria-hidden', 'true');
+  // Limpa o src depois da animação pra liberar memória
+  setTimeout(() => { if (!photoPopup.classList.contains('is-open')) photoPopupImg.src = ''; }, 400);
+}
+
+function isPhotoPopupOpen() {
+  return photoPopup && photoPopup.classList.contains('is-open');
+}
+
+/* =========================================================
+   Delegação geral de clicks
+   ========================================================= */
 document.addEventListener('click', (e) => {
+  // Fechar photo popup tem prioridade
+  if (e.target.closest('[data-photo-close]')) {
+    closePhotoPopup();
+    return;
+  }
+  // Abrir foto de produto
+  const photoTrigger = e.target.closest('[data-photo]');
+  if (photoTrigger) {
+    e.preventDefault();
+    openPhotoPopup(photoTrigger.dataset.photo, photoTrigger.dataset.photoName);
+    return;
+  }
+  // Triggers de modais de categoria
   const catTrigger = e.target.closest('[data-cat-trigger]');
   if (catTrigger) {
     e.preventDefault();
     openCategoryModal(Number(catTrigger.dataset.catTier), Number(catTrigger.dataset.catIdx));
     return;
   }
+  // Triggers de modais principais
   const trigger = e.target.closest('[data-modal-trigger]');
   if (trigger) {
     e.preventDefault();
     openModalByKey(trigger.dataset.modalTrigger);
     return;
   }
+  // Fechar modal principal
   const closer = e.target.closest('[data-modal-close]');
   if (closer && anyModalOpen()) {
     closeAllModals();
   }
 });
 
-// Teclado: Enter/Espaço no trigger, ESC pra fechar
+// Teclado: Enter/Espaço em items com foto, ESC fecha tudo
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && anyModalOpen()) {
-    closeAllModals();
-    return;
+  if (e.key === 'Escape') {
+    if (isPhotoPopupOpen()) { closePhotoPopup(); return; }
+    if (anyModalOpen()) { closeAllModals(); return; }
   }
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-modal-trigger]')) {
-    e.preventDefault();
-    openModalByKey(e.target.dataset.modalTrigger);
+  if ((e.key === 'Enter' || e.key === ' ')) {
+    if (e.target.matches('[data-photo]')) {
+      e.preventDefault();
+      openPhotoPopup(e.target.dataset.photo, e.target.dataset.photoName);
+      return;
+    }
+    if (e.target.matches('[data-modal-trigger]')) {
+      e.preventDefault();
+      openModalByKey(e.target.dataset.modalTrigger);
+    }
   }
 });

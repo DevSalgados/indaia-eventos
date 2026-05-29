@@ -1710,6 +1710,138 @@ em, .italic {
 /* Body scroll lock */
 body.modal-open { overflow: hidden; }
 
+/* =========================================================
+   ITEM COM FOTO — dica visual + estado clicável
+   ========================================================= */
+.lanche-item.has-photo,
+.mesa-cat-items li.has-photo {
+  cursor: pointer;
+  position: relative;
+}
+.lanche-item.has-photo:hover {
+  background: var(--paper);
+  border-color: var(--olive);
+}
+.mesa-cat-items li.has-photo:hover {
+  color: var(--olive-deep);
+}
+
+.lanche-item .photo-hint {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--olive-soft);
+  color: var(--olive);
+  flex-shrink: 0;
+  transition: all 0.25s var(--easing);
+}
+.lanche-item.has-photo:hover .photo-hint {
+  background: var(--olive);
+  color: var(--cream);
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   PHOTO POPUP — overlay com foto do produto
+   ========================================================= */
+.photo-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--easing), visibility 0.3s var(--easing);
+}
+.photo-popup.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.photo-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.photo-popup-content {
+  position: relative;
+  max-width: min(720px, 90vw);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  transform: scale(0.92) translateY(16px);
+  opacity: 0;
+  transition: transform 0.5s var(--easing), opacity 0.4s var(--easing);
+}
+.photo-popup.is-open .photo-popup-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.photo-popup-close {
+  position: absolute;
+  top: -14px; right: -14px;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--ink);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--easing);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-light);
+}
+.photo-popup-close:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+  transform: rotate(90deg);
+}
+
+.photo-popup-img {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(243, 237, 224, 0.08);
+}
+
+.photo-popup-caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--cream);
+  text-align: center;
+  letter-spacing: 0.01em;
+  max-width: 600px;
+}
+
+@media (max-width: 640px) {
+  .photo-popup { padding: 16px; }
+  .photo-popup-close { top: -10px; right: -10px; width: 36px; height: 36px; }
+  .photo-popup-img { max-height: 60vh; border-radius: 14px; }
+  .photo-popup-caption { font-size: 1.05rem; }
+  .lanche-item .photo-hint { width: 24px; height: 24px; }
+}
+
 /* Responsivo */
 @media (max-width: 720px) {
   .modal-lanche { padding: 12px; }
