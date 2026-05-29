@@ -234,7 +234,7 @@
             <h3>Elegance Decor</h3>
             <p>Decoração elegante para mesas dos convidados, criando uma ambientação coerente com a categoria do menu contratado.</p>
           </article>
-          <article class="card-service reveal">
+          <article class="card-service is-clickable reveal" data-modal-trigger="lanche" tabindex="0" role="button" aria-label="Abrir detalhes do Lanche da Madrugada">
             <div class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
                 <path d="M6 12h20M8 12l1 14h14l1-14M14 7h4M12 12V9a4 4 0 0 1 8 0v3"/>
@@ -243,6 +243,7 @@
             <span class="service-tier">Privilege · Excellence</span>
             <h3>Lanche da Madrugada — Tipo III</h3>
             <p>Para que ninguém saia com fome. Variedade para a virada da festa, servida no momento certo da noite.</p>
+            <span class="service-cta">Ver o cardápio do serviço →</span>
           </article>
           <article class="card-service reveal is-exclusive">
             <span class="ribbon">Exclusivo Excellence</span>
@@ -407,6 +408,116 @@
       <span>Incluir taxa de 15% sobre o consumo · valores sujeitos a reajuste</span>
     </div>
   </footer>
+
+  <!-- MODAL: Lanche da Madrugada -->
+  <div class="modal" id="modalLanche" role="dialog" aria-modal="true" aria-labelledby="modalLancheTitle" aria-hidden="true">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+
+      <!-- Hero strip do serviço — homenagem visual à arte do PDF -->
+      <div class="modal-hero" aria-hidden="true">
+        <svg class="modal-waves" viewBox="0 0 800 240" preserveAspectRatio="none">
+          <path fill="#fde6c5" d="M0 130 Q200 80 400 130 T800 130 L800 240 L0 240 Z"/>
+          <path fill="#f9b96a" d="M0 160 Q200 110 400 160 T800 160 L800 240 L0 240 Z"/>
+          <path fill="#f08a3d" d="M0 190 Q200 150 400 190 T800 190 L800 240 L0 240 Z"/>
+          <path fill="#dc4a1e" d="M0 215 Q200 185 400 215 T800 215 L800 240 L0 240 Z"/>
+        </svg>
+        <div class="modal-hero-icons">
+          <span aria-hidden="true">🍔</span>
+          <span aria-hidden="true">🍿</span>
+          <span aria-hidden="true">🌭</span>
+          <span aria-hidden="true">🍦</span>
+          <span aria-hidden="true">🥨</span>
+        </div>
+        <p class="modal-tagline">Sabor que dura<br /><em>a noite toda.</em></p>
+      </div>
+
+      <div class="modal-body">
+        <header class="modal-head">
+          <span class="modal-eyebrow">Serviço adicional</span>
+          <h2 id="modalLancheTitle">Lanches da <em>Madrugada</em></h2>
+          <p class="modal-sub">Três pacotes pensados para a virada da festa. Servido no formato volante para os convidados não pararem de celebrar.</p>
+        </header>
+
+        <!-- Pacotes -->
+        <div class="pacotes-grid">
+          <article class="pacote-card">
+            <header class="pacote-head">
+              <span class="pacote-num">Pacote 01</span>
+              <div class="pacote-price">
+                <span class="pacote-currency">R$</span><span class="pacote-value">40</span>
+              </div>
+              <span class="pacote-meta">60 min · por pessoa</span>
+            </header>
+            <ul class="pacote-items">
+              <li>Batata frita com creme de cheddar e bacon</li>
+              <li>Pipoca salgada</li>
+              <li>Mini Hambúrguer</li>
+              <li>Mini Churros com chocolate quente</li>
+            </ul>
+          </article>
+
+          <article class="pacote-card">
+            <header class="pacote-head">
+              <span class="pacote-num">Pacote 02</span>
+              <div class="pacote-price">
+                <span class="pacote-currency">R$</span><span class="pacote-value">50</span>
+              </div>
+              <span class="pacote-meta">60 min · por pessoa</span>
+            </header>
+            <ul class="pacote-items">
+              <li>Batata frita com cheddar e bacon</li>
+              <li>Pipoca salgada</li>
+              <li>Pão de queijo recheado com Catupiry</li>
+              <li>Coxinha de frango com Catupiry</li>
+              <li>Mini Hambúrguer</li>
+              <li>Mini Churros com chocolate quente</li>
+            </ul>
+          </article>
+
+          <article class="pacote-card pacote-best">
+            <span class="pacote-badge">Incluso no Privilege &amp; Excellence</span>
+            <header class="pacote-head">
+              <span class="pacote-num">Pacote 03 — Tipo III</span>
+              <div class="pacote-price">
+                <span class="pacote-currency">R$</span><span class="pacote-value">60</span>
+              </div>
+              <span class="pacote-meta">90 min · por pessoa</span>
+            </header>
+            <ul class="pacote-items">
+              <li>Batata frita com cheddar e bacon</li>
+              <li>Pipoca salgada</li>
+              <li>Pão de queijo com Catupiry</li>
+              <li>Pão de queijo com Nutella</li>
+              <li>Mini Hot Dog com salsicha Vienna</li>
+              <li>Coxinha de frango com Catupiry quente</li>
+              <li>Mini Hambúrguer</li>
+              <li>Mini Churros com chocolate quente</li>
+              <li>Fondue de chocolate com frutas</li>
+              <li>Mini casquinha de sorvete</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="modal-legal">
+          * Valores por pessoa. Serviço no formato volante.
+          O <strong>Pacote 03 (Tipo III)</strong> está incluso nos menus Privilege e Excellence.
+        </p>
+
+        <div class="modal-cta">
+          <a href="#contato" class="btn btn-primary" data-modal-close>
+            <span>Quero esse serviço no meu evento</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="assets/script.js" defer></script>
 </body>

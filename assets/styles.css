@@ -1261,6 +1261,401 @@ em, .italic {
 }
 
 /* =========================================================
+   SERVICE CARD CLICKABLE STATE
+   ========================================================= */
+.card-service.is-clickable {
+  cursor: pointer;
+}
+.card-service.is-clickable:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-bright);
+  box-shadow: 0 24px 60px -30px rgba(201, 168, 106, 0.6);
+}
+.service-cta {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  transition: color 0.25s var(--easing), transform 0.25s var(--easing);
+}
+.card-service.is-clickable:hover .service-cta {
+  color: var(--cream);
+  transform: translateX(4px);
+}
+
+/* Tier includes interactive */
+.tier-includes-list li[data-modal-trigger] {
+  cursor: pointer;
+  transition: all 0.25s var(--easing);
+}
+.tier-includes-list li[data-modal-trigger]:hover {
+  background: var(--olive);
+  color: var(--cream);
+  border-color: var(--olive);
+  transform: translateY(-2px);
+}
+.tier-includes-list li[data-modal-trigger]:hover::before {
+  background: var(--cream);
+  box-shadow: 0 0 8px var(--cream);
+}
+.tier-includes-list li[data-modal-trigger]::after {
+  content: '↗';
+  font-size: 0.9rem;
+  margin-left: 2px;
+  color: inherit;
+  opacity: 0.6;
+}
+
+/* =========================================================
+   MODAL — Lanche da Madrugada
+   ========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s var(--easing), visibility 0.35s var(--easing);
+}
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 17, 13, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  background: var(--paper);
+  border-radius: 28px;
+  overflow: hidden;
+  overflow-y: auto;
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.6);
+  transform: scale(0.94) translateY(20px);
+  opacity: 0;
+  transition: transform 0.5s var(--easing), opacity 0.4s var(--easing);
+  scrollbar-width: thin;
+  scrollbar-color: var(--olive) transparent;
+}
+.modal.is-open .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+.modal-content::-webkit-scrollbar { width: 8px; }
+.modal-content::-webkit-scrollbar-track { background: transparent; }
+.modal-content::-webkit-scrollbar-thumb { background: var(--olive); border-radius: 8px; }
+
+.modal-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--easing);
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.3);
+}
+.modal-close:hover {
+  background: var(--ink);
+  color: var(--cream);
+  transform: rotate(90deg);
+}
+
+/* Hero strip — homenagem visual à arte do PDF de Lanche da Madrugada */
+.modal-hero {
+  position: relative;
+  height: 260px;
+  background: linear-gradient(180deg, #fde6c5 0%, #f9b96a 30%, #f08a3d 60%, #dc4a1e 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 20px 40px;
+}
+.modal-waves {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.modal-hero-icons {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 18px;
+  font-size: 2.2rem;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+  margin-bottom: 14px;
+}
+.modal-hero-icons span {
+  display: inline-block;
+  animation: float 4s ease-in-out infinite;
+}
+.modal-hero-icons span:nth-child(1) { animation-delay: 0s; }
+.modal-hero-icons span:nth-child(2) { animation-delay: -1s; }
+.modal-hero-icons span:nth-child(3) { animation-delay: -2s; }
+.modal-hero-icons span:nth-child(4) { animation-delay: -3s; }
+.modal-hero-icons span:nth-child(5) { animation-delay: -1.5s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-8px) rotate(3deg); }
+}
+.modal-tagline {
+  position: relative;
+  z-index: 2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-style: italic;
+  color: #fef7d3;
+  font-weight: 500;
+  line-height: 1.15;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.005em;
+}
+.modal-tagline em {
+  display: block;
+  color: #fff7c2;
+  font-size: 1.1em;
+}
+
+/* Body */
+.modal-body {
+  padding: 50px 56px 56px;
+}
+
+.modal-head {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 44px;
+}
+.modal-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #dc4a1e;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.modal-head h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.modal-head h2 em {
+  text-transform: none;
+  color: #dc4a1e;
+  letter-spacing: -0.005em;
+}
+.modal-sub {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* Pacotes grid */
+.pacotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.pacote-card {
+  position: relative;
+  padding: 30px 26px 30px;
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 22px;
+  transition: all 0.35s var(--easing);
+}
+.pacote-card:hover {
+  transform: translateY(-4px);
+  border-color: #f08a3d;
+  box-shadow: 0 24px 50px -28px rgba(220, 74, 30, 0.4);
+}
+
+.pacote-best {
+  background: linear-gradient(180deg, #fff5e4 0%, #fde6c5 100%);
+  border: 2px solid #dc4a1e;
+  box-shadow: 0 28px 60px -28px rgba(220, 74, 30, 0.45);
+}
+.pacote-best:hover {
+  transform: translateY(-6px);
+}
+
+.pacote-badge {
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #dc4a1e, #f08a3d);
+  color: #fff7c2;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  font-weight: 700;
+  box-shadow: 0 6px 20px -6px rgba(220, 74, 30, 0.6);
+}
+
+.pacote-head {
+  text-align: center;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px dashed rgba(220, 74, 30, 0.25);
+}
+.pacote-num {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.pacote-best .pacote-num { color: #dc4a1e; }
+.pacote-price {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.pacote-currency {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: #dc4a1e;
+  font-weight: 500;
+  margin-top: 6px;
+}
+.pacote-value {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.pacote-best .pacote-value {
+  color: #dc4a1e;
+}
+.pacote-meta {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.pacote-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pacote-items li {
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--ink);
+  padding-left: 22px;
+  position: relative;
+}
+.pacote-items li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px;
+  width: 12px;
+  height: 12px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23dc4a1e' stroke-width='2'><path d='M2 6l3 3 5-6'/></svg>") center/contain no-repeat;
+}
+.pacote-best .pacote-items li::before {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23dc4a1e' stroke-width='2.5'><path d='M2 6l3 3 5-6'/></svg>") center/contain no-repeat;
+}
+
+.modal-legal {
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto 32px;
+  font-style: italic;
+}
+.modal-legal strong {
+  color: #dc4a1e;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.modal-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+.modal-cta .btn-primary {
+  background: linear-gradient(135deg, #dc4a1e, #f08a3d);
+  color: #fff;
+  box-shadow: 0 18px 40px -18px rgba(220, 74, 30, 0.6);
+}
+.modal-cta .btn-primary:hover {
+  background: linear-gradient(135deg, #c44019, #dc4a1e);
+  box-shadow: 0 24px 50px -18px rgba(220, 74, 30, 0.8);
+}
+
+/* Body lock when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .pacotes-grid { grid-template-columns: 1fr; gap: 22px; }
+  .pacote-best { order: -1; }
+  .modal-body { padding: 36px 28px 40px; }
+  .modal-hero { height: 220px; }
+  .modal-hero-icons { font-size: 1.8rem; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .modal { padding: 12px; }
+  .modal-content { border-radius: 22px; max-height: calc(100vh - 24px); }
+  .modal-close { width: 38px; height: 38px; top: 14px; right: 14px; }
+  .modal-body { padding: 32px 22px 36px; }
+  .modal-hero { height: 200px; padding: 24px 16px 30px; }
+  .modal-hero-icons { font-size: 1.6rem; }
+  .modal-tagline { font-size: 1.4rem; }
+  .pacote-card { padding: 26px 22px; }
+  .pacote-value { font-size: 2.4rem; }
+}
+
+/* =========================================================
    REVEAL ANIMATIONS
    ========================================================= */
 .reveal {

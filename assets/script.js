@@ -99,7 +99,12 @@ function renderTier(tier) {
       <div class="tier-includes">
         <div class="tier-includes-head">Serviços inclusos</div>
         <ul class="tier-includes-list">
-          ${data.includes.map(i => `<li>${i}</li>`).join('')}
+          ${data.includes.map(i => {
+            const isLanche = i.toLowerCase().includes('lanche da madrugada');
+            return isLanche
+              ? `<li data-modal-trigger="lanche" role="button" tabindex="0">${i}</li>`
+              : `<li>${i}</li>`;
+          }).join('')}
         </ul>
       </div>`
     : '';
@@ -218,4 +223,53 @@ document.addEventListener('click', (e) => {
   if (!target) return;
   e.preventDefault();
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* =========================================================
+   MODAL — Lanche da Madrugada
+   ========================================================= */
+const modal = document.getElementById('modalLanche');
+
+function openModal(key) {
+  if (!modal) return;
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  // Focus management
+  const closeBtn = modal.querySelector('.modal-close');
+  if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
+}
+
+function closeModal() {
+  if (!modal) return;
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
+// Global delegated handler: triggers and close buttons
+document.addEventListener('click', (e) => {
+  const trigger = e.target.closest('[data-modal-trigger="lanche"]');
+  if (trigger) {
+    e.preventDefault();
+    openModal('lanche');
+    return;
+  }
+  const closer = e.target.closest('[data-modal-close]');
+  if (closer && modal && modal.classList.contains('is-open')) {
+    // Allow CTAs that link to anchors to also close
+    closeModal();
+  }
+});
+
+// Keyboard: Enter/Space on trigger, ESC to close
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+    closeModal();
+    return;
+  }
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-modal-trigger="lanche"]')) {
+    e.preventDefault();
+    openModal('lanche');
+  }
 });
