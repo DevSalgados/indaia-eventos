@@ -173,24 +173,34 @@ async function doLogin() {
   loginErr.className = 'login-err';
 
   try {
-    const r = await fetch('/api/update', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({password: entered, data: null})
-    });
+    let r;
+    try {
+      r = await fetch('/api/update', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({password: entered, data: null})
+      });
+    } catch(netErr) {
+      throw new Error('Sem conexão com o servidor. Acesse o painel pelo link: indaia-mu.vercel.app/admin.html');
+    }
     if (r.status === 401) {
       showLoginErr('Senha incorreta. Tente novamente.');
       return;
     }
+    if (r.status >= 500) {
+      const txt = await r.text().catch(() => '');
+      throw new Error('Erro no servidor (' + r.status + '). Tente novamente.');
+    }
     pw = entered;
     const dr = await fetch('/data.json?_=' + Date.now());
+    if (!dr.ok) throw new Error('Erro ao carregar o cardápio (HTTP ' + dr.status + ').');
     DATA = await dr.json();
     loginWrap.hidden = true;
     appWrap.hidden = false;
     renderSidebar();
     selectTier('1');
   } catch(e) {
-    showLoginErr('Erro de conexão.');
+    showLoginErr(e.message || 'Erro desconhecido. Tente novamente.');
   } finally {
     btnLogin.textContent = 'Entrar';
     btnLogin.disabled = false;
