@@ -152,6 +152,43 @@ tierButtons.forEach(btn => {
   });
 });
 
+/* ---------- Populate Lanche da Madrugada modal ---------- */
+function populateLanche(items) {
+  const container = document.getElementById('lancheItemsContainer');
+  if (!container) return;
+  const cameraIcon = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>`;
+  container.innerHTML = items.map((item, i) => {
+    const hasPhoto = !!item.photo;
+    return `<div class="lanche-item${hasPhoto ? ' has-photo' : ''}" style="--i: ${i}"${hasPhoto ? ` data-photo="${item.photo}" data-photo-name="${item.name}" role="button" tabindex="0"` : ''}>
+      <span class="lanche-item-num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="lanche-item-name">${item.name}</span>
+      ${hasPhoto ? `<span class="photo-hint" aria-hidden="true">${cameraIcon}</span>` : ''}
+    </div>`;
+  }).join('');
+}
+
+/* ---------- Populate Mesa Mediterrânea modal ---------- */
+function populateMesa(categories) {
+  const container = document.getElementById('mesaCategoriesContainer');
+  if (!container) return;
+  container.innerHTML = categories.map((cat, i) => {
+    const titleParts = cat.title.split(' e ');
+    const titleHTML = titleParts.length > 1
+      ? `${titleParts[0]} <em>e ${titleParts.slice(1).join(' e ')}</em>`
+      : cat.title;
+    const photoBlock = cat.photo
+      ? `<div class="mesa-cat-photo-wrap"><img class="mesa-cat-photo" src="${cat.photo}" alt="${cat.title}" loading="lazy"></div>`
+      : '';
+    return `<section class="mesa-cat" style="--i: ${i}">
+      ${photoBlock}
+      <h3 class="mesa-cat-title">${titleHTML}</h3>
+      <ul class="mesa-cat-items">
+        ${cat.items.map(item => `<li>${item}</li>`).join('')}
+      </ul>
+    </section>`;
+  }).join('');
+}
+
 /* ---------- Load data from data.json, then initialize ---------- */
 fetch('/data.json?_=' + Date.now())
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -159,6 +196,10 @@ fetch('/data.json?_=' + Date.now())
     TIERS = Object.fromEntries(
       Object.entries(json.tiers).map(([k, v]) => [Number(k), v])
     );
+    if (json.services) {
+      if (json.services.lanche) populateLanche(json.services.lanche.items);
+      if (json.services.mesa) populateMesa(json.services.mesa.categories);
+    }
     setTier(4);
   })
   .catch(() => {
