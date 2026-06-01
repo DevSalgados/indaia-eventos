@@ -1,10 +1,10 @@
-{
+﻿{
   "tiers": {
     "1": {
       "name": "Superior",
       "tagline": "O essencial servido com sofisticação Indaiá.",
       "price": {
-        "value": "169",
+        "value": "149",
         "cents": "90"
       },
       "features": [
@@ -173,7 +173,7 @@
       "name": "Superior II",
       "tagline": "Variedade ampliada — entradas quentes e camarão à mesa.",
       "price": {
-        "value": "189",
+        "value": "169",
         "cents": "90"
       },
       "features": [
@@ -413,7 +413,7 @@
       "name": "Premium",
       "tagline": "Onde Burrata e Pupunha encontram a sua mesa.",
       "price": {
-        "value": "199",
+        "value": "179",
         "cents": "90"
       },
       "features": [
@@ -673,7 +673,7 @@
       "name": "Privilege",
       "tagline": "Carré de Cordeiro, Salmão e Lanche da Madrugada inclusos.",
       "price": {
-        "value": "269",
+        "value": "249",
         "cents": "90"
       },
       "badge": "Mais escolhido",
@@ -1010,7 +1010,7 @@
       "name": "Excellence",
       "tagline": "A experiência Indaiá em sua forma máxima.",
       "price": {
-        "value": "299",
+        "value": "279",
         "cents": "90"
       },
       "badge": "Experiência completa",
@@ -1343,6 +1343,34 @@
       ],
       "motivation": "A Mesa Mediterrânea recebe seus convidados. Você cuida do brinde — o resto fica conosco.",
       "progress": 100
+    }
+  }
+,
+  "services": {
+    "lanche": {
+      "items": [
+        {"name": "Batata frita com creme de cheddar e bacon", "photo": "assets/products/batata-frita-cheddar-bacon.jpg"},
+        {"name": "Pipoca salgada", "photo": "assets/products/pipoca-salgada.jpg"},
+        {"name": "Pão de queijo recheado com Catupiry", "photo": "assets/products/pao-queijo-catupiry.jpg"},
+        {"name": "Mini hot dog com salsicha Vienna", "photo": "assets/products/mini-hot-dog.jpg"},
+        {"name": "Coxinha de frango com Catupiry quente", "photo": "assets/products/coxinha-catupiry.jpg"},
+        {"name": "Mini hambúrguer", "photo": "assets/products/mini-hamburguer.jpg"},
+        {"name": "Fondue de chocolate com frutas", "photo": "assets/products/fondue-chocolate.jpg"},
+        {"name": "Mini churros com chocolate quente", "photo": "assets/products/mini-churros.jpg"},
+        {"name": "Pão de queijo com Nutella", "photo": "assets/products/pao-queijo-nutella.jpg"},
+        {"name": "Mini casquinha de sorvete", "photo": "assets/products/mini-casquinha-sorvete.jpg"}
+      ]
+    },
+    "mesa": {
+      "categories": [
+        {"title": "Queijos e cremosos", "photo": "", "items": ["Brie cremoso com caramelo artesanal e amêndoas laminadas tostadas", "Burrata fresca ao pesto de manjericão e tomates confit", "Mozzarella de búfala com tomates secos italianos e azeite extra virgem"]},
+        {"title": "Entradas autorais", "photo": "", "items": ["Bombom de ricota temperada com linguiça artesanal e crocante de nozes", "Bombom de ricota com crosta de ciboulette fresca", "Croqueta crocante de pupunha com ervas finas"]},
+        {"title": "Antipasti e pastas", "photo": "", "items": ["Antepasto mediterrâneo de tâmaras e ervas frescas", "Homus clássico com azeite extra virgem e páprica defumada", "Homus de beterraba assada com tahine e gergelim"]},
+        {"title": "Panificação artesanal", "photo": "", "items": ["Crostini artesanal com gergelim negro", "Focaccia italiana de tomates cereja confit e alecrim fresco", "Focaccia artesanal de damasco e gorgonzola dolce"]},
+        {"title": "Defumados e curados", "photo": "", "items": ["Salmão gravlax curado com endro e especiarias", "Mini brioche com sour cream, salmão gravlax e ovas"]},
+        {"title": "Frutados e agridoce", "photo": "", "items": ["Carpaccio de frutas da estação com favo de mel natural"]},
+        {"title": "Saladas contemporâneas", "photo": "", "items": ["Salada de lâminas de abobrinha e abóbora assada com ervas e azeite aromatizado"]}
+      ]
     }
   }
 }
