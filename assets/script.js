@@ -183,7 +183,11 @@ function populateMesa(categories) {
       ${photoBlock}
       <h3 class="mesa-cat-title">${titleHTML}</h3>
       <ul class="mesa-cat-items">
-        ${cat.items.map(item => `<li>${item}</li>`).join('')}
+        ${cat.items.map(item => {
+          const name = typeof item === 'string' ? item : (item.name || '');
+          const photo = typeof item === 'object' ? (item.photo || '') : '';
+          return `<li class="mesa-cat-item${photo ? ' has-photo' : ''}"${photo ? ` data-photo="${photo}" data-photo-name="${name}" role="button" tabindex="0"` : ''}>${photo ? `<img class="mesa-item-photo" src="${photo}" alt="${name}" loading="lazy">` : ''}<span>${name}</span></li>`;
+        }).join('')}
       </ul>
     </section>`;
   }).join('');
