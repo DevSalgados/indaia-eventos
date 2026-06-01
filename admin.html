@@ -104,6 +104,15 @@
     .btn-add-item { display: flex; align-items: center; gap: 6px; width: 100%; border: 1.5px dashed #d4d4d4; background: none; border-radius: 7px; padding: 8px 12px; font-size: 12px; color: #bbb; cursor: pointer; margin-top: 8px; transition: all .2s; font-family: inherit; }
     .btn-add-item:hover { border-color: var(--gold); color: var(--gold); }
 
+    /* ── ITEM FOTO ── */
+    .item-photo-wrap { position: relative; flex-shrink: 0; }
+    .item-thumb { width: 36px; height: 36px; border-radius: 6px; object-fit: cover; border: 1.5px solid var(--border); display: block; cursor: pointer; }
+    .item-no-photo { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; border: 1.5px dashed #d4d4d4; background: #f5f5f5; cursor: pointer; font-size: 16px; transition: border-color .15s; }
+    .item-no-photo:hover { border-color: var(--gold); }
+    .item-photo-input { display: none; }
+    .item-photo-loading { width: 36px; height: 36px; border-radius: 6px; border: 1.5px solid var(--border); background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #aaa; }
+    .item-photo-del { position: absolute; top: -5px; right: -5px; width: 16px; height: 16px; background: #c44; border: none; border-radius: 50%; color: #fff; font-size: 10px; line-height: 16px; text-align: center; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; }
+
     /* ── INCLUDES ── */
     .includes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
     .include-row { display: flex; align-items: center; gap: 8px; }
@@ -361,8 +370,19 @@ function renderCatHTML(cat, ci) {
 
 function renderItemHTML(item, ii, ci) {
   const tags = item.tags || [];
+  const photo = item.photo || '';
+  const photoHTML = photo
+    ? `<img class="item-thumb" src="${esc(photo)}" alt="" onclick="document.getElementById('fi-${ci}-${ii}').click()" title="Trocar foto">
+       <button class="item-photo-del" onclick="removeItemPhoto(${ci},${ii})" title="Remover foto">×</button>`
+    : `<span class="item-no-photo" onclick="document.getElementById('fi-${ci}-${ii}').click()" title="Adicionar foto">🖼</span>`;
+
   return `
     <div class="item-row" data-ci="${ci}" data-ii="${ii}">
+      <div class="item-photo-wrap" id="fw-${ci}-${ii}">
+        ${photoHTML}
+        <input class="item-photo-input" type="file" accept="image/*" id="fi-${ci}-${ii}"
+          onchange="uploadItemPhoto(${ci},${ii},this)">
+      </div>
       <input class="item-name-in" type="text" value="${esc(item.name)}"
         placeholder="Nome do prato" oninput="setItemName(${ci},${ii},this.value)">
       <div class="tag-grp">
@@ -429,6 +449,62 @@ function addInclude() {
 function removeInclude(ii) {
   DATA.tiers[curTier].includes.splice(ii, 1);
   renderMain();
+}
+
+/* ── Foto de item ── */
+async function uploadItemPhoto(ci, ii, input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const MAX_MB = 0.8;
+  if (file.size > MAX_MB * 1024 * 1024) {
+    alert('Imagem muito grande. Use uma foto de até 800 KB.');
+    input.value = '';
+    return;
+  }
+
+  const wrap = document.getElementById(`fw-${ci}-${ii}`);
+  wrap.innerHTML = '<div class="item-photo-loading">...</div>';
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+    const filename = `t${curTier}_c${ci}_i${ii}_${Date.now()}.${ext}`;
+
+    try {
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({password: pw, filename, content: base64})
+      });
+      const rj = await r.json();
+      if (!r.ok) throw new Error(rj.error || `HTTP ${r.status}`);
+
+      DATA.tiers[curTier].features[ci].items[ii].photo = rj.url;
+      wrap.innerHTML = `
+        <img class="item-thumb" src="${rj.url}?_=${Date.now()}" alt=""
+          onclick="document.getElementById('fi-${ci}-${ii}').click()" title="Trocar foto">
+        <button class="item-photo-del" onclick="removeItemPhoto(${ci},${ii})" title="Remover foto">×</button>
+        <input class="item-photo-input" type="file" accept="image/*" id="fi-${ci}-${ii}"
+          onchange="uploadItemPhoto(${ci},${ii},this)">`;
+    } catch(err) {
+      wrap.innerHTML = `<span class="item-no-photo" onclick="document.getElementById('fi-${ci}-${ii}').click()" title="Adicionar foto">🖼</span>
+        <input class="item-photo-input" type="file" accept="image/*" id="fi-${ci}-${ii}"
+          onchange="uploadItemPhoto(${ci},${ii},this)">`;
+      alert('Erro ao fazer upload: ' + err.message);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeItemPhoto(ci, ii) {
+  DATA.tiers[curTier].features[ci].items[ii].photo = '';
+  const wrap = document.getElementById(`fw-${ci}-${ii}`);
+  if (wrap) wrap.innerHTML = `
+    <span class="item-no-photo" onclick="document.getElementById('fi-${ci}-${ii}').click()" title="Adicionar foto">🖼</span>
+    <input class="item-photo-input" type="file" accept="image/*" id="fi-${ci}-${ii}"
+      onchange="uploadItemPhoto(${ci},${ii},this)">`;
 }
 
 /* ── Helper ── */
