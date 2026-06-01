@@ -1363,13 +1363,13 @@
     },
     "mesa": {
       "categories": [
-        {"title": "Queijos e cremosos", "photo": "", "items": ["Brie cremoso com caramelo artesanal e amêndoas laminadas tostadas", "Burrata fresca ao pesto de manjericão e tomates confit", "Mozzarella de búfala com tomates secos italianos e azeite extra virgem"]},
-        {"title": "Entradas autorais", "photo": "", "items": ["Bombom de ricota temperada com linguiça artesanal e crocante de nozes", "Bombom de ricota com crosta de ciboulette fresca", "Croqueta crocante de pupunha com ervas finas"]},
-        {"title": "Antipasti e pastas", "photo": "", "items": ["Antepasto mediterrâneo de tâmaras e ervas frescas", "Homus clássico com azeite extra virgem e páprica defumada", "Homus de beterraba assada com tahine e gergelim"]},
-        {"title": "Panificação artesanal", "photo": "", "items": ["Crostini artesanal com gergelim negro", "Focaccia italiana de tomates cereja confit e alecrim fresco", "Focaccia artesanal de damasco e gorgonzola dolce"]},
-        {"title": "Defumados e curados", "photo": "", "items": ["Salmão gravlax curado com endro e especiarias", "Mini brioche com sour cream, salmão gravlax e ovas"]},
-        {"title": "Frutados e agridoce", "photo": "", "items": ["Carpaccio de frutas da estação com favo de mel natural"]},
-        {"title": "Saladas contemporâneas", "photo": "", "items": ["Salada de lâminas de abobrinha e abóbora assada com ervas e azeite aromatizado"]}
+        {"title": "Queijos e cremosos", "photo": "", "items": [{"name": "Brie cremoso com caramelo artesanal e amêndoas laminadas tostadas", "photo": ""}, {"name": "Burrata fresca ao pesto de manjericão e tomates confit", "photo": ""}, {"name": "Mozzarella de búfala com tomates secos italianos e azeite extra virgem", "photo": ""}]},
+        {"title": "Entradas autorais", "photo": "", "items": [{"name": "Bombom de ricota temperada com linguiça artesanal e crocante de nozes", "photo": ""}, {"name": "Bombom de ricota com crosta de ciboulette fresca", "photo": ""}, {"name": "Croqueta crocante de pupunha com ervas finas", "photo": ""}]},
+        {"title": "Antipasti e pastas", "photo": "", "items": [{"name": "Antepasto mediterrâneo de tâmaras e ervas frescas", "photo": ""}, {"name": "Homus clássico com azeite extra virgem e páprica defumada", "photo": ""}, {"name": "Homus de beterraba assada com tahine e gergelim", "photo": ""}]},
+        {"title": "Panificação artesanal", "photo": "", "items": [{"name": "Crostini artesanal com gergelim negro", "photo": ""}, {"name": "Focaccia italiana de tomates cereja confit e alecrim fresco", "photo": ""}, {"name": "Focaccia artesanal de damasco e gorgonzola dolce", "photo": ""}]},
+        {"title": "Defumados e curados", "photo": "", "items": [{"name": "Salmão gravlax curado com endro e especiarias", "photo": ""}, {"name": "Mini brioche com sour cream, salmão gravlax e ovas", "photo": ""}]},
+        {"title": "Frutados e agridoce", "photo": "", "items": [{"name": "Carpaccio de frutas da estação com favo de mel natural", "photo": ""}]},
+        {"title": "Saladas contemporâneas", "photo": "", "items": [{"name": "Salada de lâminas de abobrinha e abóbora assada com ervas e azeite aromatizado", "photo": ""}]}
       ]
     }
   }
