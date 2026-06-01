@@ -596,14 +596,8 @@ function renderMesaCatHTML(cat, ci) {
           oninput="DATA.services.mesa.categories[${ci}].title=this.value" placeholder="Nome da categoria">
         <button class="btn-x" onclick="removeMesaCat(${ci})" title="Remover categoria">×</button>
       </div>
-      <div class="items-list" style="margin-top:8px">
-        ${cat.items.map((item, ii) => `
-          <div class="item-row">
-            <input class="item-name-in" type="text" value="${esc(item)}"
-              oninput="DATA.services.mesa.categories[${ci}].items[${ii}]=this.value"
-              placeholder="Item da categoria">
-            <button class="btn-x" onclick="removeMesaItem(${ci},${ii})">×</button>
-          </div>`).join('')}
+      <div class="items-list" style="margin-top:8px" id="mesaItemsList-${ci}">
+        ${cat.items.map((item, ii) => renderMesaItemHTML(item, ii, ci)).join('')}
       </div>
       <button class="btn-add-item" style="margin-top:6px" onclick="addMesaItem(${ci})">+ Adicionar item</button>
     </div>`;
@@ -658,8 +652,74 @@ function removeMesaCat(ci) {
   renderMesa();
 }
 
+function renderMesaItemHTML(item, ii, ci) {
+  const itemName = typeof item === 'string' ? item : (item.name || '');
+  const itemPhoto = typeof item === 'object' ? (item.photo || '') : '';
+  const photoHTML = itemPhoto
+    ? `<img class="item-thumb" src="${esc(itemPhoto)}" alt="" onclick="document.getElementById('mifi-${ci}-${ii}').click()" title="Trocar foto">
+       <button class="item-photo-del" onclick="removeMesaItemPhoto(${ci},${ii})">×</button>`
+    : `<span class="item-no-photo" onclick="document.getElementById('mifi-${ci}-${ii}').click()" title="Foto do item">🖼</span>`;
+  return `
+    <div class="item-row" data-mci="${ci}" data-mii="${ii}">
+      <div class="item-photo-wrap" id="mifw-${ci}-${ii}">
+        ${photoHTML}
+        <input class="item-photo-input" type="file" accept="image/*" id="mifi-${ci}-${ii}"
+          onchange="uploadMesaItemPhoto(${ci},${ii},this)">
+      </div>
+      <input class="item-name-in" type="text" value="${esc(itemName)}"
+        oninput="DATA.services.mesa.categories[${ci}].items[${ii}].name=this.value"
+        placeholder="Item da categoria">
+      <button class="btn-x" onclick="removeMesaItem(${ci},${ii})">×</button>
+    </div>`;
+}
+
+async function uploadMesaItemPhoto(ci, ii, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 0.8 * 1024 * 1024) { alert('Imagem muito grande. Use até 800 KB.'); input.value=''; return; }
+  const wrap = document.getElementById(`mifw-${ci}-${ii}`);
+  wrap.innerHTML = '<div class="item-photo-loading">...</div>';
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+    const filename = `mesa_item_c${ci}_i${ii}_${Date.now()}.${ext}`;
+    try {
+      const r = await fetch('/api/upload', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({password:pw, filename, content:base64})
+      });
+      const rj = await r.json();
+      if (!r.ok) throw new Error(rj.error);
+      if (typeof DATA.services.mesa.categories[ci].items[ii] === 'string') {
+        DATA.services.mesa.categories[ci].items[ii] = {name: DATA.services.mesa.categories[ci].items[ii], photo: rj.url};
+      } else {
+        DATA.services.mesa.categories[ci].items[ii].photo = rj.url;
+      }
+      wrap.innerHTML = `<img class="item-thumb" src="${rj.url}?_=${Date.now()}" alt=""
+        onclick="document.getElementById('mifi-${ci}-${ii}').click()" title="Trocar foto">
+        <button class="item-photo-del" onclick="removeMesaItemPhoto(${ci},${ii})">×</button>
+        <input class="item-photo-input" type="file" accept="image/*" id="mifi-${ci}-${ii}"
+          onchange="uploadMesaItemPhoto(${ci},${ii},this)">`;
+    } catch(err) {
+      wrap.innerHTML = `<span class="item-no-photo" onclick="document.getElementById('mifi-${ci}-${ii}').click()">🖼</span>
+        <input class="item-photo-input" type="file" accept="image/*" id="mifi-${ci}-${ii}"
+          onchange="uploadMesaItemPhoto(${ci},${ii},this)">`;
+      alert('Erro: ' + err.message);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeMesaItemPhoto(ci, ii) {
+  if (typeof DATA.services.mesa.categories[ci].items[ii] === 'object') {
+    DATA.services.mesa.categories[ci].items[ii].photo = '';
+  }
+  renderMesa();
+}
+
 function addMesaItem(ci) {
-  DATA.services.mesa.categories[ci].items.push('');
+  DATA.services.mesa.categories[ci].items.push({name:'', photo:''});
   renderMesa();
 }
 
