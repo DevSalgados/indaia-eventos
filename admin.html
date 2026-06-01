@@ -160,6 +160,7 @@
 let pw = '';
 let DATA = null;
 let curTier = '1';
+let curSection = 'tier';
 
 /* ── DOM refs ── */
 const loginWrap = document.getElementById('loginWrap');
@@ -259,17 +260,43 @@ function setStatus(msg, cls) {
 function renderSidebar() {
   sidebar.innerHTML = '<div class="sb-label">Menus</div>' +
     Object.entries(DATA.tiers).map(([n, t]) =>
-      `<button class="sb-btn${n === curTier ? ' active' : ''}" data-tier="${n}" onclick="selectTier('${n}')">
+      `<button class="sb-btn" data-tier="${n}" onclick="selectTier('${n}')">
         <span class="sb-num">Menu ${n.padStart(2,'0')}</span>
         <span class="sb-name">${esc(t.name)}</span>
       </button>`
-    ).join('');
+    ).join('') +
+    '<div class="sb-label" style="margin-top:12px">Serviços</div>' +
+    `<button class="sb-btn" data-section="lanche" onclick="selectSection('lanche')">
+      <span class="sb-num">Serviço</span>
+      <span class="sb-name">Lanche da Madrugada</span>
+    </button>
+    <button class="sb-btn" data-section="mesa" onclick="selectSection('mesa')">
+      <span class="sb-num">Serviço</span>
+      <span class="sb-name">Mesa Mediterrânea</span>
+    </button>`;
+  updateSidebarActive();
+}
+
+function updateSidebarActive() {
+  sidebar.querySelectorAll('.sb-btn').forEach(b => {
+    const isTier = b.dataset.tier && b.dataset.tier === curTier && curSection === 'tier';
+    const isSection = b.dataset.section && b.dataset.section === curSection;
+    b.classList.toggle('active', isTier || isSection);
+  });
 }
 
 function selectTier(n) {
   curTier = n;
-  sidebar.querySelectorAll('.sb-btn').forEach(b => b.classList.toggle('active', b.dataset.tier === n));
+  curSection = 'tier';
+  updateSidebarActive();
   renderMain();
+}
+
+function selectSection(sec) {
+  curSection = sec;
+  updateSidebarActive();
+  if (sec === 'lanche') renderLanche();
+  else if (sec === 'mesa') renderMesa();
 }
 
 /* ── Main ── */
@@ -449,6 +476,196 @@ function addInclude() {
 function removeInclude(ii) {
   DATA.tiers[curTier].includes.splice(ii, 1);
   renderMain();
+}
+
+/* ── Lanche da Madrugada ── */
+function renderLanche() {
+  const items = DATA.services.lanche.items;
+  mainContent.innerHTML = `
+    <div class="main-title">Lanche da Madrugada</div>
+    <div class="card">
+      <div class="card-head"><h3>Itens do serviço</h3></div>
+      <div class="card-body">
+        <div class="items-list" id="lancheList">
+          ${items.map((item, ii) => renderLancheItemHTML(item, ii)).join('')}
+        </div>
+        <button class="btn-add-item" onclick="addLancheItem()">+ Adicionar item</button>
+      </div>
+    </div>`;
+}
+
+function renderLancheItemHTML(item, ii) {
+  const photo = item.photo || '';
+  const photoHTML = photo
+    ? `<img class="item-thumb" src="${esc(photo)}" alt="" onclick="document.getElementById('lfi-${ii}').click()" title="Trocar foto">
+       <button class="item-photo-del" onclick="removeLanchePhoto(${ii})" title="Remover foto">×</button>`
+    : `<span class="item-no-photo" onclick="document.getElementById('lfi-${ii}').click()" title="Adicionar foto">🖼</span>`;
+  return `
+    <div class="item-row" data-lii="${ii}">
+      <div class="item-photo-wrap" id="lfw-${ii}">
+        ${photoHTML}
+        <input class="item-photo-input" type="file" accept="image/*" id="lfi-${ii}"
+          onchange="uploadLanchePhoto(${ii},this)">
+      </div>
+      <input class="item-name-in" type="text" value="${esc(item.name)}"
+        placeholder="Nome do item" oninput="DATA.services.lanche.items[${ii}].name=this.value">
+      <button class="btn-x" onclick="removeLancheItem(${ii})" title="Remover">×</button>
+    </div>`;
+}
+
+async function uploadLanchePhoto(ii, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 0.8 * 1024 * 1024) { alert('Imagem muito grande. Use até 800 KB.'); input.value=''; return; }
+  const wrap = document.getElementById(`lfw-${ii}`);
+  wrap.innerHTML = '<div class="item-photo-loading">...</div>';
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+    const filename = `lanche_${ii}_${Date.now()}.${ext}`;
+    try {
+      const r = await fetch('/api/upload', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({password:pw, filename, content:base64})
+      });
+      const rj = await r.json();
+      if (!r.ok) throw new Error(rj.error);
+      DATA.services.lanche.items[ii].photo = rj.url;
+      wrap.innerHTML = `<img class="item-thumb" src="${rj.url}?_=${Date.now()}" alt=""
+        onclick="document.getElementById('lfi-${ii}').click()" title="Trocar foto">
+        <button class="item-photo-del" onclick="removeLanchePhoto(${ii})">×</button>
+        <input class="item-photo-input" type="file" accept="image/*" id="lfi-${ii}"
+          onchange="uploadLanchePhoto(${ii},this)">`;
+    } catch(err) {
+      wrap.innerHTML = `<span class="item-no-photo" onclick="document.getElementById('lfi-${ii}').click()">🖼</span>
+        <input class="item-photo-input" type="file" accept="image/*" id="lfi-${ii}"
+          onchange="uploadLanchePhoto(${ii},this)">`;
+      alert('Erro: ' + err.message);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeLanchePhoto(ii) {
+  DATA.services.lanche.items[ii].photo = '';
+  const wrap = document.getElementById(`lfw-${ii}`);
+  if (wrap) wrap.innerHTML = `<span class="item-no-photo" onclick="document.getElementById('lfi-${ii}').click()">🖼</span>
+    <input class="item-photo-input" type="file" accept="image/*" id="lfi-${ii}" onchange="uploadLanchePhoto(${ii},this)">`;
+}
+
+function addLancheItem() {
+  DATA.services.lanche.items.push({name:'', photo:''});
+  renderLanche();
+}
+
+function removeLancheItem(ii) {
+  DATA.services.lanche.items.splice(ii, 1);
+  renderLanche();
+}
+
+/* ── Mesa Mediterrânea ── */
+function renderMesa() {
+  const cats = DATA.services.mesa.categories;
+  mainContent.innerHTML = `
+    <div class="main-title">Mesa Mediterrânea</div>
+    <div class="card">
+      <div class="card-head"><h3>Categorias</h3></div>
+      <div class="card-body">
+        ${cats.map((cat, ci) => renderMesaCatHTML(cat, ci)).join('<hr class="cat-divider">')}
+        <button class="btn-add-item" style="margin-top:16px" onclick="addMesaCat()">+ Adicionar categoria</button>
+      </div>
+    </div>`;
+}
+
+function renderMesaCatHTML(cat, ci) {
+  const photo = cat.photo || '';
+  const photoHTML = photo
+    ? `<img class="item-thumb" src="${esc(photo)}" alt="" onclick="document.getElementById('mfi-${ci}').click()" title="Trocar foto">
+       <button class="item-photo-del" onclick="removeMesaPhoto(${ci})">×</button>`
+    : `<span class="item-no-photo" onclick="document.getElementById('mfi-${ci}').click()" title="Foto da categoria">🖼</span>`;
+  return `
+    <div class="cat-block" data-mci="${ci}">
+      <div class="cat-top">
+        <div class="item-photo-wrap" id="mfw-${ci}">
+          ${photoHTML}
+          <input class="item-photo-input" type="file" accept="image/*" id="mfi-${ci}"
+            onchange="uploadMesaPhoto(${ci},this)">
+        </div>
+        <input class="cat-label-in" type="text" value="${esc(cat.title)}"
+          oninput="DATA.services.mesa.categories[${ci}].title=this.value" placeholder="Nome da categoria">
+        <button class="btn-x" onclick="removeMesaCat(${ci})" title="Remover categoria">×</button>
+      </div>
+      <div class="items-list" style="margin-top:8px">
+        ${cat.items.map((item, ii) => `
+          <div class="item-row">
+            <input class="item-name-in" type="text" value="${esc(item)}"
+              oninput="DATA.services.mesa.categories[${ci}].items[${ii}]=this.value"
+              placeholder="Item da categoria">
+            <button class="btn-x" onclick="removeMesaItem(${ci},${ii})">×</button>
+          </div>`).join('')}
+      </div>
+      <button class="btn-add-item" style="margin-top:6px" onclick="addMesaItem(${ci})">+ Adicionar item</button>
+    </div>`;
+}
+
+async function uploadMesaPhoto(ci, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 0.8 * 1024 * 1024) { alert('Imagem muito grande. Use até 800 KB.'); input.value=''; return; }
+  const wrap = document.getElementById(`mfw-${ci}`);
+  wrap.innerHTML = '<div class="item-photo-loading">...</div>';
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+    const filename = `mesa_cat${ci}_${Date.now()}.${ext}`;
+    try {
+      const r = await fetch('/api/upload', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({password:pw, filename, content:base64})
+      });
+      const rj = await r.json();
+      if (!r.ok) throw new Error(rj.error);
+      DATA.services.mesa.categories[ci].photo = rj.url;
+      wrap.innerHTML = `<img class="item-thumb" src="${rj.url}?_=${Date.now()}" alt=""
+        onclick="document.getElementById('mfi-${ci}').click()" title="Trocar foto">
+        <button class="item-photo-del" onclick="removeMesaPhoto(${ci})">×</button>
+        <input class="item-photo-input" type="file" accept="image/*" id="mfi-${ci}"
+          onchange="uploadMesaPhoto(${ci},this)">`;
+    } catch(err) {
+      wrap.innerHTML = `<span class="item-no-photo" onclick="document.getElementById('mfi-${ci}').click()">🖼</span>
+        <input class="item-photo-input" type="file" accept="image/*" id="mfi-${ci}"
+          onchange="uploadMesaPhoto(${ci},this)">`;
+      alert('Erro: ' + err.message);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeMesaPhoto(ci) {
+  DATA.services.mesa.categories[ci].photo = '';
+  renderMesa();
+}
+
+function addMesaCat() {
+  DATA.services.mesa.categories.push({title:'', photo:'', items:[]});
+  renderMesa();
+}
+
+function removeMesaCat(ci) {
+  DATA.services.mesa.categories.splice(ci, 1);
+  renderMesa();
+}
+
+function addMesaItem(ci) {
+  DATA.services.mesa.categories[ci].items.push('');
+  renderMesa();
+}
+
+function removeMesaItem(ci, ii) {
+  DATA.services.mesa.categories[ci].items.splice(ii, 1);
+  renderMesa();
 }
 
 /* ── Foto de item ── */
