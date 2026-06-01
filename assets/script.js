@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    INDAIÁ EVENTOS — Interações
    ========================================================= */
 
@@ -223,7 +223,8 @@ function openCategoryModal(tier, catIdx) {
 
   const itemsEl = document.getElementById('modalCatItems');
   itemsEl.innerHTML = cat.items.map((item, i) => `
-    <li class="modal-cat-item" style="--i: ${i}">
+    <li class="modal-cat-item${item.photo ? ' has-photo' : ''}" style="--i: ${i}">
+      ${item.photo ? `<img class="modal-cat-item-photo" src="${item.photo}" alt="${item.name}" loading="lazy">` : ''}
       <span class="modal-cat-item-name">${item.name}</span>
       ${item.tags.length ? `<span class="diet-dots">${item.tags.map(t => `<span class="diet-dot diet-dot--${t}" aria-label="${DIET_LABELS[t]}" title="${DIET_LABELS[t]}"></span>`).join('')}</span>` : ''}
     </li>
